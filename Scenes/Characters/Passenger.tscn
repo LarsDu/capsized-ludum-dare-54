@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" path="res://Scripts/Passenger.cs" id="1_q6fx3"]
 [ext_resource type="Material" uid="uid://dx4abhptbjgts" path="res://Materials/gamejam.tres" id="2_nf2tm"]
-[ext_resource type="PackedScene" uid="uid://k0ouisag7w34" path="res://Scenes/lifering.tscn" id="3_xqev4"]
+[ext_resource type="ArrayMesh" uid="uid://byi7th70q620y" path="res://Meshes/lifering.res" id="3_pfj1b"]
 [ext_resource type="Script" path="res://Scripts/StateMachine/StateMachine.cs" id="4_tcaq7"]
 [ext_resource type="Script" path="res://Scripts/StateMachine/FlailingState.cs" id="6_5efvj"]
 [ext_resource type="Script" path="res://Scripts/StateMachine/SeatedState.cs" id="6_p88hk"]
@@ -1108,7 +1108,7 @@ sittingState = NodePath("StateMachine/SeatedState")
 ejectingState = NodePath("StateMachine/KickedOffBoatState")
 leavingState = NodePath("StateMachine/KickedOffBoatState")
 seekingState = NodePath("StateMachine/SwimAtPlayerState")
-lifeRingMesh = NodePath("lifering")
+lifeRingMesh = NodePath("")
 buisnessmanMesh = NodePath("humanoid_armature/Skeleton3D/businessman")
 ladyMesh = NodePath("humanoid_armature/Skeleton3D/lady")
 moneybagsMesh = NodePath("humanoid_armature/Skeleton3D/top_hat_man")
@@ -1308,8 +1308,9 @@ libraries = {
 "": SubResource("AnimationLibrary_3rgmi")
 }
 
-[node name="lifering" parent="." instance=ExtResource("3_xqev4")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4.00975, 0)
+[node name="Lifering" type="MeshInstance3D" parent="."]
+transform = Transform3D(1.8, 0, 0, 0, 1.8, 0, 0, 0, 1.8, 0, 3.3668, -0.0379618)
+mesh = ExtResource("3_pfj1b")
 
 [node name="StateMachine" type="Node3D" parent="." node_paths=PackedStringArray("_currentState")]
 script = ExtResource("4_tcaq7")
@@ -1318,7 +1319,7 @@ _currentState = NodePath("FlailingState")
 [node name="SeatedState" type="Node3D" parent="StateMachine" node_paths=PackedStringArray("passenger", "lifeRing", "animationPlayer")]
 script = ExtResource("6_p88hk")
 passenger = NodePath("../..")
-lifeRing = NodePath("../../lifering")
+lifeRing = NodePath("../../Lifering")
 animationPlayer = NodePath("../../AnimationPlayer")
 animationName = "seated_worried"
 
@@ -1349,7 +1350,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 6.46874, -0.0729372)
 [node name="SwimAtPlayerState" type="Node3D" parent="StateMachine" node_paths=PackedStringArray("swimmerBody", "lifeRing", "animationPlayer")]
 script = ExtResource("8_8pgij")
 swimmerBody = NodePath("../..")
-lifeRing = NodePath("../../lifering")
+lifeRing = NodePath("../../Lifering")
 animationPlayer = NodePath("../../AnimationPlayer")
 animationName = "swim"
 

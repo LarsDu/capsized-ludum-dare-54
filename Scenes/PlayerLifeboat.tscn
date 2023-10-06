@@ -1,10 +1,10 @@
 [gd_scene load_steps=8 format=3 uid="uid://dkrjsaoks54vx"]
 
 [ext_resource type="Script" path="res://Scripts/Player/BoatController.cs" id="1_ek621"]
-[ext_resource type="PackedScene" uid="uid://cb0mv7foekk78" path="res://Scenes/lifeboat_visual.tscn" id="2_i8b6g"]
 [ext_resource type="PackedScene" uid="uid://c7ye4jll0pwpx" path="res://Scenes/Rower.tscn" id="2_mbovw"]
 [ext_resource type="Script" path="res://Scripts/Player/BoatArea3D.cs" id="4_p2gfc"]
 [ext_resource type="Script" path="res://Scripts/Player/Seat.cs" id="5_0n4am"]
+[ext_resource type="ArrayMesh" uid="uid://b0nbwf8fgo24l" path="res://Meshes/lifeboat.res" id="5_3nmwr"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_jlr5w"]
 radius = 7.63575
@@ -20,8 +20,6 @@ RowSpeed = 600.0
 
 [node name="Rower" parent="." instance=ExtResource("2_mbovw")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 5.5353, 15.882)
-
-[node name="lifeboat" parent="." instance=ExtResource("2_i8b6g")]
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 2.325, 0)
@@ -84,3 +82,6 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.416537, 0.752406, -9.45288)
 script = ExtResource("5_0n4am")
 
 [node name="RemoteTransform3D" type="RemoteTransform3D" parent="BoatArea3D/Seats/SeatNode7"]
+
+[node name="LifeBoatMeshInstance3D" type="MeshInstance3D" parent="."]
+mesh = ExtResource("5_3nmwr")
