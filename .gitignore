@@ -31,3 +31,8 @@ mono_crash.*.json
 
 # Built Visual Studio Code Extensions
 *.vsix
+
+# Blender temporary files
+*.blend1
+*.blend2
+*.tmp.blend
