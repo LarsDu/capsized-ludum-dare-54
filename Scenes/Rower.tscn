@@ -1,0 +1,46 @@
+[gd_scene load_steps=3 format=3 uid="uid://c7ye4jll0pwpx"]
+
+[ext_resource type="PackedScene" uid="uid://dc8awqdn6xulq" path="res://Meshes/humanoid_bald_man.glb" id="1_3ao2u"]
+[ext_resource type="Material" uid="uid://dx4abhptbjgts" path="res://Materials/gamejam.tres" id="2_c0ti8"]
+
+[node name="Rower" instance=ExtResource("1_3ao2u")]
+
+[node name="Skeleton3D" parent="humanoid_armature" index="0"]
+bones/0/position = Vector3(7.10543e-15, 1.3512, 0.452565)
+bones/1/rotation = Quaternion(-0.21894, -0.0258861, 0.0237446, 0.975106)
+bones/2/rotation = Quaternion(0.52544, 0.00759604, 0.00303108, 0.850791)
+bones/3/rotation = Quaternion(-0.132155, -0.00313377, 0.000354639, 0.991224)
+bones/5/rotation = Quaternion(0.561719, 0.259987, 0.397547, 0.677373)
+bones/6/rotation = Quaternion(0.217066, -0.215368, 0.157736, 0.938945)
+bones/7/rotation = Quaternion(-0.302424, -0.333925, 0.000715, 0.892767)
+bones/9/rotation = Quaternion(0.606455, -0.281607, -0.442034, 0.597926)
+bones/10/rotation = Quaternion(0.0292542, 0.343515, -0.145491, 0.927348)
+bones/11/rotation = Quaternion(-0.299054, 0.234755, 0.0268631, 0.924519)
+bones/12/rotation = Quaternion(-0.00142213, 0.819364, 0.573268, 0.00203999)
+bones/12/scale = Vector3(1, 0.999997, 1.00001)
+bones/13/rotation = Quaternion(-0.66396, 1.57436e-05, 0.00294038, 0.747762)
+bones/14/rotation = Quaternion(0.433262, -0.000718251, -0.000855981, 0.901267)
+bones/15/rotation = Quaternion(-0.00142224, -0.819364, -0.573268, 0.00204012)
+bones/15/scale = Vector3(1, 0.999998, 1.00002)
+bones/16/rotation = Quaternion(-0.663961, -1.57243e-05, -0.00294041, 0.747762)
+bones/17/rotation = Quaternion(0.433262, 0.000718249, 0.000855997, 0.901267)
+bones/19/position = Vector3(-0.935141, 0.468867, -1.06953)
+bones/21/position = Vector3(0.935141, 0.468867, -1.06953)
+
+[node name="businessman" parent="humanoid_armature/Skeleton3D" index="0"]
+visible = false
+
+[node name="humanoid_template" parent="humanoid_armature/Skeleton3D" index="1"]
+visible = false
+
+[node name="lady" parent="humanoid_armature/Skeleton3D" index="2"]
+visible = false
+
+[node name="rowing_man" parent="humanoid_armature/Skeleton3D" index="3"]
+surface_material_override/0 = ExtResource("2_c0ti8")
+
+[node name="top_hat_man" parent="humanoid_armature/Skeleton3D" index="4"]
+visible = false
+
+[node name="AnimationPlayer" parent="." index="1"]
+autoplay = "help"

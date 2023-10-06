@@ -1,0 +1,61 @@
+[gd_scene load_steps=11 format=3 uid="uid://dwe10evjfpu7h"]
+
+[ext_resource type="Material" uid="uid://co481815cj85w" path="res://Materials/water_shaded.tres" id="1_ane04"]
+[ext_resource type="PackedScene" uid="uid://rv04kq3xadjx" path="res://Scenes/ship_rescue.tscn" id="3_w65s2"]
+[ext_resource type="PackedScene" uid="uid://ck4cdyi6pwmuy" path="res://Meshes/capsized_text.glb" id="3_wbeu5"]
+[ext_resource type="PackedScene" uid="uid://cy66n4bqwi7kv" path="res://Scenes/capsized_text.tscn" id="4_28b45"]
+[ext_resource type="PackedScene" uid="uid://bqsoajho14s0w" path="res://Scenes/Characters/Passenger.tscn" id="5_618fp"]
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_fsswh"]
+material = ExtResource("1_ane04")
+size = Vector2(4000, 4000)
+subdivide_width = 50
+subdivide_depth = 50
+
+[sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_jnlv6"]
+data = PackedVector3Array(1, 0, 1, -1, 0, 1, 1, 0, -1, -1, 0, 1, -1, 0, -1, 1, 0, -1)
+
+[sub_resource type="PhysicalSkyMaterial" id="PhysicalSkyMaterial_5tdke"]
+turbidity = 27.9
+sun_disk_scale = 2.75
+
+[sub_resource type="Sky" id="Sky_54yle"]
+sky_material = SubResource("PhysicalSkyMaterial_5tdke")
+
+[sub_resource type="Environment" id="Environment_pcjyr"]
+background_mode = 2
+background_energy_multiplier = 2.65
+sky = SubResource("Sky_54yle")
+
+[node name="MainMenuBackground" type="Node3D"]
+
+[node name="GroundMesh" type="MeshInstance3D" parent="."]
+material_override = ExtResource("1_ane04")
+mesh = SubResource("PlaneMesh_fsswh")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="GroundMesh"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="GroundMesh/StaticBody3D"]
+shape = SubResource("ConcavePolygonShape3D_jnlv6")
+
+[node name="ShipRescue" parent="." instance=ExtResource("3_w65s2")]
+transform = Transform3D(0.415212, -0.370166, 0.831009, -0.134358, 0.878503, 0.458454, -0.899748, -0.302008, 0.31503, -87.1453, 1.99334, 889.07)
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.474718, 0.880138, 0, -0.880138, 0.474718, 0, 133.71, 0)
+light_color = Color(0.658824, 0.996078, 1, 1)
+light_energy = 1.2
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_pcjyr")
+
+[node name="capsized_text" parent="." instance=ExtResource("3_wbeu5")]
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(-0.96005, 0, 0.279829, 0, 1, 0, -0.279829, 0, -0.96005, 0, 138.056, -272.164)
+
+[node name="CapSizedText" parent="Camera3D" instance=ExtResource("4_28b45")]
+transform = Transform3D(-1, 0, -8.9407e-08, 0, 1, 0, 8.9407e-08, 0, -1, -0.125862, 0, -5.75536)
+
+[node name="Passenger" parent="Camera3D" instance=ExtResource("5_618fp")]
+transform = Transform3D(-0.96005, -0.00315496, -0.279811, 0, 0.999936, -0.0112746, 0.279829, -0.0108242, -0.959988, -13.1078, -11.2822, -26.1192)

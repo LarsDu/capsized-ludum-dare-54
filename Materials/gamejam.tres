@@ -1,0 +1,14 @@
+[gd_resource type="StandardMaterial3D" load_steps=4 format=3 uid="uid://dx4abhptbjgts"]
+
+[ext_resource type="Texture2D" uid="uid://c6b5ktn7nj3g7" path="res://Blender/Textures/ImphenziaPalettes/ImphenziaPalette02-Albedo.png" id="1_ujeh1"]
+[ext_resource type="Texture2D" uid="uid://c5e00g8u1f6nv" path="res://Blender/Textures/ImphenziaPalettes/ImphenziaPalette02-Emission.png" id="2_1nitk"]
+[ext_resource type="Material" uid="uid://r2eegx7njg48" path="res://Materials/toon_pass.tres" id="3_fmm1o"]
+
+[resource]
+next_pass = ExtResource("3_fmm1o")
+diffuse_mode = 3
+specular_mode = 1
+albedo_texture = ExtResource("1_ujeh1")
+roughness = 0.0
+emission_enabled = true
+emission_texture = ExtResource("2_1nitk")

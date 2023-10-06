@@ -1,0 +1,9 @@
+[gd_scene load_steps=3 format=3 uid="uid://k0ouisag7w34"]
+
+[ext_resource type="PackedScene" uid="uid://cn3ubx54d47wx" path="res://Meshes/lifering.glb" id="1_c0ikw"]
+[ext_resource type="Material" uid="uid://dx4abhptbjgts" path="res://Materials/gamejam.tres" id="2_xccxd"]
+
+[node name="lifering" instance=ExtResource("1_c0ikw")]
+
+[node name="lifering2" parent="." index="0"]
+surface_material_override/0 = ExtResource("2_xccxd")

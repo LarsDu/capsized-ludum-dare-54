@@ -1,0 +1,9 @@
+[gd_scene load_steps=3 format=3 uid="uid://cb0mv7foekk78"]
+
+[ext_resource type="PackedScene" uid="uid://csa31wdyj1fru" path="res://Meshes/lifeboat.glb" id="1_vs1h2"]
+[ext_resource type="Material" uid="uid://dx4abhptbjgts" path="res://Materials/gamejam.tres" id="2_3duyu"]
+
+[node name="lifeboat" instance=ExtResource("1_vs1h2")]
+
+[node name="lifeboat2" parent="." index="0"]
+surface_material_override/0 = ExtResource("2_3duyu")

@@ -1,0 +1,64 @@
+[gd_scene load_steps=11 format=3 uid="uid://joxg7xvl2fy1"]
+
+[sub_resource type="Gradient" id="Gradient_sh2w8"]
+colors = PackedColorArray(0, 0, 0.894118, 1, 1, 1, 1, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_l0viw"]
+gradient = SubResource("Gradient_sh2w8")
+
+[sub_resource type="Gradient" id="Gradient_lyy83"]
+colors = PackedColorArray(0.31321, 0.522067, 1, 1, 1, 1, 1, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_xt1x2"]
+gradient = SubResource("Gradient_lyy83")
+
+[sub_resource type="Curve" id="Curve_ueatf"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0.694737), 0.132191, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_o7gr0"]
+curve = SubResource("Curve_ueatf")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_8illt"]
+lifetime_randomness = 0.1
+emission_shape = 1
+emission_sphere_radius = 0.3
+direction = Vector3(1, 1, 1)
+spread = 75.61
+gravity = Vector3(0, 10, 0)
+initial_velocity_max = 4.25
+linear_accel_max = 1.0
+scale_min = 0.1
+scale_max = 5.0
+scale_curve = SubResource("CurveTexture_o7gr0")
+color = Color(0.105882, 1, 1, 1)
+color_ramp = SubResource("GradientTexture1D_xt1x2")
+color_initial_ramp = SubResource("GradientTexture1D_l0viw")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_sbxtq"]
+blend_mode = 1
+cull_mode = 2
+shading_mode = 2
+diffuse_mode = 3
+specular_mode = 2
+disable_ambient_light = true
+billboard_mode = 1
+billboard_keep_scale = true
+
+[sub_resource type="QuadMesh" id="QuadMesh_8fsjn"]
+material = SubResource("StandardMaterial3D_sbxtq")
+size = Vector2(0.2, 0.2)
+
+[sub_resource type="Skin" id="Skin_dfn1o"]
+
+[node name="DrowningBubblesGPUParticles3D" type="GPUParticles3D"]
+cast_shadow = 0
+emitting = false
+amount = 24
+lifetime = 2.0
+one_shot = true
+speed_scale = 2.0
+explosiveness = 0.25
+process_material = SubResource("ParticleProcessMaterial_8illt")
+draw_pass_1 = SubResource("QuadMesh_8fsjn")
+draw_skin = SubResource("Skin_dfn1o")

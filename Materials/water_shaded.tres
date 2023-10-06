@@ -1,0 +1,10 @@
+[gd_resource type="ShaderMaterial" load_steps=2 format=3 uid="uid://co481815cj85w"]
+
+[ext_resource type="Shader" uid="uid://de5ane2hya1pi" path="res://Materials/water_visual_shader.tres" id="1_nt71n"]
+
+[resource]
+render_priority = 0
+shader = ExtResource("1_nt71n")
+shader_parameter/vertexScale = 5.0
+shader_parameter/ColorParameter = Color(0.047059, 1, 1, 1)
+shader_parameter/transparency = 0.3

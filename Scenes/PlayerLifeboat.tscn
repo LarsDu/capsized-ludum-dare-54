@@ -1,0 +1,86 @@
+[gd_scene load_steps=8 format=3 uid="uid://dkrjsaoks54vx"]
+
+[ext_resource type="Script" path="res://Scripts/Player/BoatController.cs" id="1_ek621"]
+[ext_resource type="PackedScene" uid="uid://cb0mv7foekk78" path="res://Scenes/lifeboat_visual.tscn" id="2_i8b6g"]
+[ext_resource type="PackedScene" uid="uid://c7ye4jll0pwpx" path="res://Scenes/Rower.tscn" id="2_mbovw"]
+[ext_resource type="Script" path="res://Scripts/Player/BoatArea3D.cs" id="4_p2gfc"]
+[ext_resource type="Script" path="res://Scripts/Player/Seat.cs" id="5_0n4am"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_jlr5w"]
+radius = 7.63575
+height = 34.24
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_3shoh"]
+radius = 12.8782
+height = 39.1037
+
+[node name="PlayerLifeboat" type="CharacterBody3D" groups=["Player"]]
+script = ExtResource("1_ek621")
+RowSpeed = 600.0
+
+[node name="Rower" parent="." instance=ExtResource("2_mbovw")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 5.5353, 15.882)
+
+[node name="lifeboat" parent="." instance=ExtResource("2_i8b6g")]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 2.325, 0)
+rotation_order = 0
+shape = SubResource("CapsuleShape3D_jlr5w")
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(-1, 2.65431e-08, -8.32959e-08, -2.03061e-08, 0.856213, 0.516623, 8.50318e-08, 0.516623, -0.856213, -9.58392e-07, 29.5676, -19.7608)
+current = true
+fov = 85.0
+
+[node name="BoatArea3D" type="Area3D" parent="." node_paths=PackedStringArray("seats")]
+script = ExtResource("4_p2gfc")
+seats = [NodePath("Seats/SeatNode"), NodePath("Seats/SeatNode2"), NodePath("Seats/SeatNode3"), NodePath("Seats/SeatNode4"), NodePath("Seats/SeatNode5"), NodePath("Seats/SeatNode6"), NodePath("Seats/SeatNode7")]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="BoatArea3D"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0)
+shape = SubResource("CapsuleShape3D_3shoh")
+
+[node name="Seats" type="Node3D" parent="BoatArea3D"]
+
+[node name="SeatNode" type="Node3D" parent="BoatArea3D/Seats"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.44958, 0.752407, 4.70283)
+script = ExtResource("5_0n4am")
+
+[node name="RemoteTransform3D" type="RemoteTransform3D" parent="BoatArea3D/Seats/SeatNode"]
+
+[node name="SeatNode2" type="Node3D" parent="BoatArea3D/Seats"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.30384, 0.752407, 4.70283)
+script = ExtResource("5_0n4am")
+
+[node name="RemoteTransform3D" type="RemoteTransform3D" parent="BoatArea3D/Seats/SeatNode2"]
+
+[node name="SeatNode3" type="Node3D" parent="BoatArea3D/Seats"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.5656, 0.752407, -0.0524137)
+script = ExtResource("5_0n4am")
+
+[node name="RemoteTransform3D" type="RemoteTransform3D" parent="BoatArea3D/Seats/SeatNode3"]
+
+[node name="SeatNode4" type="Node3D" parent="BoatArea3D/Seats"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.30384, 0.752407, -0.0524137)
+script = ExtResource("5_0n4am")
+
+[node name="RemoteTransform3D" type="RemoteTransform3D" parent="BoatArea3D/Seats/SeatNode4"]
+
+[node name="SeatNode5" type="Node3D" parent="BoatArea3D/Seats"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.68893, 0.752407, -4.35461)
+script = ExtResource("5_0n4am")
+
+[node name="RemoteTransform3D" type="RemoteTransform3D" parent="BoatArea3D/Seats/SeatNode5"]
+
+[node name="SeatNode6" type="Node3D" parent="BoatArea3D/Seats"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.30384, 0.752407, -4.35461)
+script = ExtResource("5_0n4am")
+
+[node name="RemoteTransform3D" type="RemoteTransform3D" parent="BoatArea3D/Seats/SeatNode6"]
+
+[node name="SeatNode7" type="Node3D" parent="BoatArea3D/Seats"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.416537, 0.752406, -9.45288)
+script = ExtResource("5_0n4am")
+
+[node name="RemoteTransform3D" type="RemoteTransform3D" parent="BoatArea3D/Seats/SeatNode7"]
