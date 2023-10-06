@@ -15,9 +15,9 @@ public partial class KickedOffTheBoatState : AnimatedState
 		base.Enter();
 		// Unparent transforms
 
-		// Don't collide with anything
-		passengerBody.CollisionLayer = 0;
-		passengerBody.CollisionMask = 0;
+		// Don't collide with boat but still collide with ladders!
+		passengerBody.CollisionLayer = 2;
+		passengerBody.CollisionMask = 2;
 
 		// Random Direction to yeet the passenger
 		direction = new Vector3(4*(float)GD.RandRange(-1.0f, 1.0f), (float)GD.RandRange(.5, 0.8f), (float)GD.RandRange(-0.05f, 0.05f));
