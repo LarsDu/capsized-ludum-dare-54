@@ -3,7 +3,7 @@
 [ext_resource type="Material" uid="uid://co481815cj85w" path="res://Materials/water_shaded.tres" id="1_ane04"]
 [ext_resource type="PackedScene" uid="uid://rv04kq3xadjx" path="res://Scenes/ship_rescue.tscn" id="3_w65s2"]
 [ext_resource type="Material" uid="uid://dx4abhptbjgts" path="res://Materials/gamejam.tres" id="3_wq127"]
-[ext_resource type="PackedScene" uid="uid://bqsoajho14s0w" path="res://Scenes/Characters/Passenger.tscn" id="5_618fp"]
+[ext_resource type="PackedScene" uid="uid://bqsoajho14s0w" path="res://Scenes/Characters/passenger.tscn" id="5_618fp"]
 [ext_resource type="ArrayMesh" uid="uid://cyx53lvu0xjw1" path="res://Meshes/iceberg.res" id="5_ewf13"]
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_fsswh"]

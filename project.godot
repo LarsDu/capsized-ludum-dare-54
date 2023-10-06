@@ -11,7 +11,7 @@ config_version=5
 [application]
 
 config/name="CapSizedLD54"
-run/main_scene="res://Scenes/MainMenuUI.tscn"
+run/main_scene="res://Scenes/main_menu_ui.tscn"
 config/features=PackedStringArray("4.1", "C#", "Forward Plus")
 config/icon="res://icon.svg"
 

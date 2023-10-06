@@ -1,8 +1,8 @@
 [gd_scene load_steps=5 format=3 uid="uid://stnsfxv42k0w"]
 
-[ext_resource type="Script" path="res://Scripts/UI/SceneChangeButton.cs" id="1_4vbdh"]
-[ext_resource type="PackedScene" uid="uid://ksyeh4c4ja6d" path="res://Scenes/game.tscn" id="2_f0hpr"]
-[ext_resource type="PackedScene" uid="uid://dwe10evjfpu7h" path="res://Scenes/MainMenuBackground.tscn" id="2_mcd43"]
+[ext_resource type="Script" path="res://Scripts/UI/SceneChangeButton.cs" id="1_ym3ar"]
+[ext_resource type="PackedScene" uid="uid://ksyeh4c4ja6d" path="res://Scenes/game.tscn" id="2_pv0cm"]
+[ext_resource type="PackedScene" uid="uid://dwe10evjfpu7h" path="res://Scenes/main_menu_background.tscn" id="3_2anug"]
 
 [sub_resource type="Theme" id="Theme_1hfn5"]
 default_base_scale = 1.22
@@ -38,8 +38,8 @@ layout_mode = 2
 theme = SubResource("Theme_1hfn5")
 theme_override_font_sizes/font_size = 76
 text = "Start"
-script = ExtResource("1_4vbdh")
-gameScene = ExtResource("2_f0hpr")
+script = ExtResource("1_ym3ar")
+gameScene = ExtResource("2_pv0cm")
 
 [node name="Background" type="Node3D" parent="."]
 
@@ -61,6 +61,6 @@ handle_input_locally = false
 size = Vector2i(1379, 795)
 render_target_update_mode = 4
 
-[node name="MainMenuBackground" parent="Background/SubViewportContainer/SubViewport" instance=ExtResource("2_mcd43")]
+[node name="MainMenuBackground" parent="Background/SubViewportContainer/SubViewport" instance=ExtResource("3_2anug")]
 
 [connection signal="pressed" from="CanvasLayer/MarginContainer/VBoxContainer/StartButton" to="CanvasLayer/MarginContainer/VBoxContainer/StartButton" method="OnStartButtonPressed"]

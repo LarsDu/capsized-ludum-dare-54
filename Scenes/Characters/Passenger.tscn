@@ -1,17 +1,17 @@
 [gd_scene load_steps=31 format=3 uid="uid://bqsoajho14s0w"]
 
-[ext_resource type="Script" path="res://Scripts/Passenger.cs" id="1_q6fx3"]
-[ext_resource type="Material" uid="uid://dx4abhptbjgts" path="res://Materials/gamejam.tres" id="2_nf2tm"]
-[ext_resource type="ArrayMesh" uid="uid://byi7th70q620y" path="res://Meshes/lifering.res" id="3_pfj1b"]
-[ext_resource type="Script" path="res://Scripts/StateMachine/StateMachine.cs" id="4_tcaq7"]
-[ext_resource type="Script" path="res://Scripts/StateMachine/FlailingState.cs" id="6_5efvj"]
-[ext_resource type="Script" path="res://Scripts/StateMachine/SeatedState.cs" id="6_p88hk"]
-[ext_resource type="Script" path="res://Scripts/StateMachine/KickedOffTheBoatState.cs" id="7_o2ytf"]
-[ext_resource type="Script" path="res://Scripts/StateMachine/SwimAtPlayerState.cs" id="8_8pgij"]
-[ext_resource type="Script" path="res://Scripts/StateMachine/DrowningState.cs" id="8_ilfgm"]
-[ext_resource type="PackedScene" uid="uid://joxg7xvl2fy1" path="res://Scenes/drowning_bubbles_gpu_particles_3d.tscn" id="9_lt801"]
-[ext_resource type="PackedScene" uid="uid://ctrwcw65dobr3" path="res://Scenes/drowning_explosion_gpu_particles_3d.tscn" id="9_ufj4i"]
-[ext_resource type="Script" path="res://Scripts/StateMachine/WanderState.cs" id="9_v4h73"]
+[ext_resource type="Script" path="res://Scripts/Passenger.cs" id="1_iyx0b"]
+[ext_resource type="Material" uid="uid://dx4abhptbjgts" path="res://Materials/gamejam.tres" id="2_v2bem"]
+[ext_resource type="ArrayMesh" uid="uid://byi7th70q620y" path="res://Meshes/lifering.res" id="3_3flyx"]
+[ext_resource type="Script" path="res://Scripts/StateMachine/StateMachine.cs" id="4_m3k7x"]
+[ext_resource type="Script" path="res://Scripts/StateMachine/SeatedState.cs" id="5_64qx7"]
+[ext_resource type="Script" path="res://Scripts/StateMachine/FlailingState.cs" id="6_n4deu"]
+[ext_resource type="Script" path="res://Scripts/StateMachine/KickedOffTheBoatState.cs" id="7_xi6hg"]
+[ext_resource type="Script" path="res://Scripts/StateMachine/DrowningState.cs" id="8_mslpd"]
+[ext_resource type="PackedScene" uid="uid://joxg7xvl2fy1" path="res://Scenes/drowning_bubbles_gpu_particles_3d.tscn" id="9_acplf"]
+[ext_resource type="PackedScene" uid="uid://ctrwcw65dobr3" path="res://Scenes/drowning_explosion_gpu_particles_3d.tscn" id="10_wuso2"]
+[ext_resource type="Script" path="res://Scripts/StateMachine/SwimAtPlayerState.cs" id="11_8qec6"]
+[ext_resource type="Script" path="res://Scripts/StateMachine/WanderState.cs" id="12_0lws7"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_5ltrd"]
 
@@ -1096,9 +1096,9 @@ _data = {
 resource_local_to_scene = true
 radius = 5.798
 
-[node name="Passenger" type="CharacterBody3D" node_paths=PackedStringArray("stateMachine", "animationPlayer", "flailingState", "sittingState", "ejectingState", "leavingState", "seekingState", "lifeRingMesh", "buisnessmanMesh", "ladyMesh", "moneybagsMesh", "sailorMesh") groups=["Passenger"]]
+[node name="Passenger" type="CharacterBody3D" node_paths=PackedStringArray("stateMachine", "animationPlayer", "flailingState", "sittingState", "ejectingState", "leavingState", "seekingState", "buisnessmanMesh", "ladyMesh", "moneybagsMesh", "sailorMesh") groups=["Passenger"]]
 transform = Transform3D(1, 0, 0, 0, 0.999936, -0.0112746, 0, 0.0112746, 0.999936, 0, 0, 0)
-script = ExtResource("1_q6fx3")
+script = ExtResource("1_iyx0b")
 setRandomPassengerType = true
 stateMachine = NodePath("StateMachine")
 animationPlayer = NodePath("AnimationPlayer")
@@ -1108,7 +1108,6 @@ sittingState = NodePath("StateMachine/SeatedState")
 ejectingState = NodePath("StateMachine/KickedOffBoatState")
 leavingState = NodePath("StateMachine/KickedOffBoatState")
 seekingState = NodePath("StateMachine/SwimAtPlayerState")
-lifeRingMesh = NodePath("")
 buisnessmanMesh = NodePath("humanoid_armature/Skeleton3D/businessman")
 ladyMesh = NodePath("humanoid_armature/Skeleton3D/lady")
 moneybagsMesh = NodePath("humanoid_armature/Skeleton3D/top_hat_man")
@@ -1276,23 +1275,23 @@ bones/21/scale = Vector3(1, 1, 1)
 visible = false
 mesh = SubResource("ArrayMesh_w23cr")
 skin = SubResource("Skin_5makw")
-surface_material_override/0 = ExtResource("2_nf2tm")
+surface_material_override/0 = ExtResource("2_v2bem")
 
 [node name="humanoid_template" type="MeshInstance3D" parent="humanoid_armature/Skeleton3D"]
 visible = false
 mesh = SubResource("ArrayMesh_2ihtb")
 skin = SubResource("Skin_5makw")
-surface_material_override/0 = ExtResource("2_nf2tm")
+surface_material_override/0 = ExtResource("2_v2bem")
 
 [node name="lady" type="MeshInstance3D" parent="humanoid_armature/Skeleton3D"]
 visible = false
 mesh = SubResource("ArrayMesh_2n6u4")
 skin = SubResource("Skin_5makw")
-surface_material_override/0 = ExtResource("2_nf2tm")
+surface_material_override/0 = ExtResource("2_v2bem")
 
 [node name="rowing_man" type="MeshInstance3D" parent="humanoid_armature/Skeleton3D"]
 visible = false
-material_override = ExtResource("2_nf2tm")
+material_override = ExtResource("2_v2bem")
 mesh = SubResource("ArrayMesh_q7kko")
 skin = SubResource("Skin_5makw")
 
@@ -1300,7 +1299,7 @@ skin = SubResource("Skin_5makw")
 visible = false
 mesh = SubResource("ArrayMesh_m2qnj")
 skin = SubResource("Skin_5makw")
-surface_material_override/0 = ExtResource("2_nf2tm")
+surface_material_override/0 = ExtResource("2_v2bem")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 autoplay = "help"
@@ -1310,52 +1309,52 @@ libraries = {
 
 [node name="Lifering" type="MeshInstance3D" parent="."]
 transform = Transform3D(1.8, 0, 0, 0, 1.8, 0, 0, 0, 1.8, 0, 3.3668, -0.0379618)
-mesh = ExtResource("3_pfj1b")
+mesh = ExtResource("3_3flyx")
 
 [node name="StateMachine" type="Node3D" parent="." node_paths=PackedStringArray("_currentState")]
-script = ExtResource("4_tcaq7")
+script = ExtResource("4_m3k7x")
 _currentState = NodePath("FlailingState")
 
 [node name="SeatedState" type="Node3D" parent="StateMachine" node_paths=PackedStringArray("passenger", "lifeRing", "animationPlayer")]
-script = ExtResource("6_p88hk")
+script = ExtResource("5_64qx7")
 passenger = NodePath("../..")
 lifeRing = NodePath("../../Lifering")
 animationPlayer = NodePath("../../AnimationPlayer")
 animationName = "seated_worried"
 
 [node name="FlailingState" type="Node3D" parent="StateMachine" node_paths=PackedStringArray("animationPlayer")]
-script = ExtResource("6_5efvj")
+script = ExtResource("6_n4deu")
 animationPlayer = NodePath("../../AnimationPlayer")
 
 [node name="KickedOffBoatState" type="Node3D" parent="StateMachine" node_paths=PackedStringArray("passengerBody", "nextState", "animationPlayer")]
-script = ExtResource("7_o2ytf")
+script = ExtResource("7_xi6hg")
 passengerBody = NodePath("../..")
 nextState = NodePath("../DrowningState")
 animationPlayer = NodePath("../../AnimationPlayer")
 animationName = "ejected"
 
 [node name="DrowningState" type="Node3D" parent="StateMachine" node_paths=PackedStringArray("passenger", "drowningParticles", "animationPlayer")]
-script = ExtResource("8_ilfgm")
+script = ExtResource("8_mslpd")
 passenger = NodePath("../..")
 drowningParticles = NodePath("DrowningBubblesGPUParticles3D")
 animationPlayer = NodePath("../../AnimationPlayer")
 animationName = "ejected"
 
-[node name="DrowningBubblesGPUParticles3D" parent="StateMachine/DrowningState" instance=ExtResource("9_lt801")]
+[node name="DrowningBubblesGPUParticles3D" parent="StateMachine/DrowningState" instance=ExtResource("9_acplf")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 8.2545, -0.0930722)
 
-[node name="DrowningExplosionGPUParticles3D" parent="StateMachine/DrowningState" instance=ExtResource("9_ufj4i")]
+[node name="DrowningExplosionGPUParticles3D" parent="StateMachine/DrowningState" instance=ExtResource("10_wuso2")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 6.46874, -0.0729372)
 
 [node name="SwimAtPlayerState" type="Node3D" parent="StateMachine" node_paths=PackedStringArray("swimmerBody", "lifeRing", "animationPlayer")]
-script = ExtResource("8_8pgij")
+script = ExtResource("11_8qec6")
 swimmerBody = NodePath("../..")
 lifeRing = NodePath("../../Lifering")
 animationPlayer = NodePath("../../AnimationPlayer")
 animationName = "swim"
 
 [node name="WanderState" type="Node3D" parent="StateMachine" node_paths=PackedStringArray("swimmerBody", "animationPlayer")]
-script = ExtResource("9_v4h73")
+script = ExtResource("12_0lws7")
 swimmerBody = NodePath("../..")
 animationPlayer = NodePath("../../AnimationPlayer")
 animationName = "swim"

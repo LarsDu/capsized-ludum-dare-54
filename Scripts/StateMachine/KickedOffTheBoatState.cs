@@ -20,7 +20,7 @@ public partial class KickedOffTheBoatState : AnimatedState
 		passengerBody.CollisionMask = 2;
 
 		// Random Direction to yeet the passenger
-		direction = new Vector3(4*(float)GD.RandRange(-1.0f, 1.0f), (float)GD.RandRange(.5, 0.8f), (float)GD.RandRange(-0.05f, 0.05f));
+		direction = new Vector3(4*(float)GD.RandRange(-1.0f, 1.0f), (float)GD.RandRange(0.8f, 1.0f), (float)GD.RandRange(-0.05f, 0.05f));
 		passengerBody.Velocity = passengerBody.Transform.Basis * direction * EjectionSpeed;
 	}
 

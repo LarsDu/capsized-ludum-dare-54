@@ -1,7 +1,7 @@
 [gd_scene load_steps=8 format=3 uid="uid://dkrjsaoks54vx"]
 
 [ext_resource type="Script" path="res://Scripts/Player/BoatController.cs" id="1_ek621"]
-[ext_resource type="PackedScene" uid="uid://c7ye4jll0pwpx" path="res://Scenes/Rower.tscn" id="2_mbovw"]
+[ext_resource type="PackedScene" uid="uid://c7ye4jll0pwpx" path="res://Scenes/Characters/rower.tscn" id="2_mbovw"]
 [ext_resource type="Script" path="res://Scripts/Player/BoatArea3D.cs" id="4_p2gfc"]
 [ext_resource type="Script" path="res://Scripts/Player/Seat.cs" id="5_0n4am"]
 [ext_resource type="ArrayMesh" uid="uid://b0nbwf8fgo24l" path="res://Meshes/lifeboat.res" id="5_3nmwr"]
