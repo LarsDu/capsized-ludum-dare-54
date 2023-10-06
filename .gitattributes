@@ -1,0 +1,9 @@
+# Normalize EOL for all files that Git considers text files.
+* text=auto eol=lf
+
+# Declare .blend files to be stored in LFS
+*.blend filter=lfs diff=lfs merge=lfs -text
+
+# Declare .gltf and .glb files to be stored in LFS
+*.gltf filter=lfs diff=lfs merge=lfs -text
+*.glb filter=lfs diff=lfs merge=lfs -text
