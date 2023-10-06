@@ -1,8 +1,0 @@
-[gd_scene load_steps=2 format=3 uid="uid://cy66n4bqwi7kv"]
-
-[ext_resource type="Material" uid="uid://dx4abhptbjgts" path="res://Materials/gamejam.tres" id="2_o563u"]
-
-[node name="capsized_text"]
-
-[node name="Text" parent="." index="0"]
-surface_material_override/0 = ExtResource("2_o563u")
