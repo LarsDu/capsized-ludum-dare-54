@@ -18,8 +18,15 @@ public partial class FinalReadout : RichTextLabel
 	public string GetRating(ScoreManager scoreManager){
 		// Give sily names based on how many people died and how much money you made
 		// Nested ifs are yuck
+		if(scoreManager.Saved > 100){
+			return "SAVIOR OF THE SEAS";
+		}
+
+
 		if (scoreManager.Deaths > 50){
-			if (scoreManager.Profit > 1000){
+			if (scoreManager.Profit > 2000){
+				return "EL CHAPO";
+			} else if (scoreManager.Profit > 1000){
 				return "CAPTAIN AHAB";
 			}
 			if(scoreManager.Saved > 50){
