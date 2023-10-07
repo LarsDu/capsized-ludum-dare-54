@@ -13,19 +13,19 @@ public partial class DrowningState : AnimatedState
 
     [Signal] public delegate void OnDrownEventHandler();
     [Signal] public delegate void OnDeathEventHandler();
+
+    private bool _isDrowning = false;
     public override void Enter(){
         base.Enter();
 
         // Connect the death signal to the ScoreManager which is tagged with the group "ScoreManager"
-        ScoreManager scoreManager = (ScoreManager)GetTree().GetNodesInGroup("ScoreManager")[0];
+        ScoreManager scoreManager = (ScoreManager)GetTree().GetNodesInGroup("ScoreManager")[0]; // How to get rid of this magic string?
         if(scoreManager != null)
             OnDeath += scoreManager.IncrementDeaths;
         //if(splashParticles != null)
         //    splashParticles.Emitting = true;
 
-        if(drowningParticles != null)
-            drowningParticles.Emitting = true;
-        EmitSignal(SignalName.OnDrown);
+
         passenger.Velocity = Vector3.Zero;
     }
 
@@ -34,8 +34,16 @@ public partial class DrowningState : AnimatedState
         base.PhysicsUpdate(delta);
         passenger.Velocity = passenger.Velocity + waterGravity;
         // Pull the passenger down
-
         passenger.MoveAndSlide();
+
+        if (passenger.GlobalPosition.Y < -2.0f){
+            // Only trigger drowning once
+            if(!_isDrowning){
+                _isDrowning = true;
+                drowningParticles.Emitting = true;
+                EmitSignal(SignalName.OnDrown);
+            }
+        }
     }
 
     public override void Update(double delta){

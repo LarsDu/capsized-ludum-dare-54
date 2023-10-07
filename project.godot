@@ -46,9 +46,13 @@ Backward={
 ]
 }
 
+[layer_names]
+
+3d_physics/layer_1="boat"
+3d_physics/layer_2="ladder"
+
 [rendering]
 
-renderer/rendering_method="mobile"
 anti_aliasing/screen_space_roughness_limiter/enabled=false
 anti_aliasing/quality/msaa_3d=3
 anti_aliasing/quality/screen_space_aa=1

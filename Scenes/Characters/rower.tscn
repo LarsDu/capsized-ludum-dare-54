@@ -1,7 +1,6 @@
-[gd_scene load_steps=10 format=3 uid="uid://c7ye4jll0pwpx"]
+[gd_scene load_steps=9 format=3 uid="uid://c7ye4jll0pwpx"]
 
 [ext_resource type="ArrayMesh" uid="uid://dqayd1pgkclwb" path="res://Meshes/characters/rower.res" id="1_73m51"]
-[ext_resource type="Material" uid="uid://dx4abhptbjgts" path="res://Materials/gamejam.tres" id="2_ans64"]
 
 [sub_resource type="Skin" id="Skin_37mo6"]
 resource_name = "Skin"
@@ -1145,7 +1144,6 @@ bones/21/scale = Vector3(1, 1, 1)
 [node name="rowing_man" type="MeshInstance3D" parent="humanoid_armature/Skeleton3D"]
 mesh = ExtResource("1_73m51")
 skin = SubResource("Skin_37mo6")
-surface_material_override/0 = ExtResource("2_ans64")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 autoplay = "help"

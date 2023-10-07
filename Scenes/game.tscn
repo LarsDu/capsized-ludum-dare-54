@@ -15,6 +15,18 @@
 [ext_resource type="Script" path="res://Scripts/UI/SceneReloadButton.cs" id="9_kd3l7"]
 [ext_resource type="Script" path="res://Scripts/Scoring/ScoreManager.cs" id="11_w3wq3"]
 
+[sub_resource type="PhysicalSkyMaterial" id="PhysicalSkyMaterial_5tdke"]
+turbidity = 27.9
+sun_disk_scale = 2.75
+
+[sub_resource type="Sky" id="Sky_54yle"]
+sky_material = SubResource("PhysicalSkyMaterial_5tdke")
+
+[sub_resource type="Environment" id="Environment_pcjyr"]
+background_mode = 2
+background_energy_multiplier = 2.65
+sky = SubResource("Sky_54yle")
+
 [sub_resource type="PlaneMesh" id="PlaneMesh_fsswh"]
 material = ExtResource("1_30glw")
 size = Vector2(4000, 4000)
@@ -31,18 +43,6 @@ size = Vector3(100, 71.75, 400)
 [sub_resource type="SphereShape3D" id="SphereShape3D_s4huf"]
 radius = 88.886
 
-[sub_resource type="PhysicalSkyMaterial" id="PhysicalSkyMaterial_5tdke"]
-turbidity = 27.9
-sun_disk_scale = 2.75
-
-[sub_resource type="Sky" id="Sky_54yle"]
-sky_material = SubResource("PhysicalSkyMaterial_5tdke")
-
-[sub_resource type="Environment" id="Environment_pcjyr"]
-background_mode = 2
-background_energy_multiplier = 2.65
-sky = SubResource("Sky_54yle")
-
 [sub_resource type="Theme" id="Theme_wfdpi"]
 
 [sub_resource type="Theme" id="Theme_nsepe"]
@@ -53,6 +53,9 @@ sky = SubResource("Sky_54yle")
 
 [node name="Node3D" type="Node3D"]
 
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_pcjyr")
+
 [node name="WaterMesh" type="MeshInstance3D" parent="."]
 material_override = ExtResource("1_30glw")
 mesh = SubResource("PlaneMesh_fsswh")
@@ -62,13 +65,13 @@ mesh = SubResource("PlaneMesh_fsswh")
 [node name="CollisionShape3D" type="CollisionShape3D" parent="WaterMesh/StaticBody3D"]
 shape = SubResource("ConcavePolygonShape3D_jnlv6")
 
-[node name="LifeRings" type="Node3D" parent="."]
+[node name="LifeRingsRandomSpawner" type="Node3D" parent="."]
 script = ExtResource("4_ffa1u")
-scene = ExtResource("3_t7uka")
-maxSpawn = 90
+packedScenes = Array[PackedScene]([ExtResource("3_t7uka")])
+maxSpawn = 60
 radius = 200.0
 
-[node name="Passenger" parent="LifeRings" instance=ExtResource("3_t7uka")]
+[node name="Passenger" parent="LifeRingsRandomSpawner" instance=ExtResource("3_t7uka")]
 transform = Transform3D(1, 0, 0, 0, 0.999936, -0.0112746, 0, 0.0112746, 0.999936, 0, 0, 6.68085)
 
 [node name="PlayerLifeboat" parent="." instance=ExtResource("2_14251")]
@@ -226,9 +229,6 @@ transform = Transform3D(0.415212, -0.370166, 0.831009, -0.134358, 0.878503, 0.45
 transform = Transform3D(1, 0, 0, 0, 0.474718, 0.880138, 0, -0.880138, 0.474718, 0, 133.71, 0)
 light_color = Color(0.658824, 0.996078, 1, 1)
 light_energy = 1.2
-
-[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
-environment = SubResource("Environment_pcjyr")
 
 [node name="IceBergs" type="Node3D" parent="."]
 
