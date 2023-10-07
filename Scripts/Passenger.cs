@@ -70,7 +70,7 @@ public partial class Passenger : CharacterBody3D
 
 		PopulatePassengerStateMap();
 
-		animationPlayer ??= GetNode<AnimationPlayer>("AnimationPlayer");
+		animationPlayer ??= GetNode<AnimationPlayer>("%AnimationPlayer");
 		
 
 		if(mesh != null && randomizeColor){

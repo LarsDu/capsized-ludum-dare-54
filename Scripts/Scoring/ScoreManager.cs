@@ -7,48 +7,64 @@ public partial class ScoreManager : Node
 	[Export] Label savedLabel;
 	[Export] Label deathsLabel;
 
-	private int _profit = 0;
-	private int _saved = 0;
-	private int _deaths = 0;
+	public int Profit{
+		get;
+		protected set;
+	}
 
+	public int Saved{
+		get;
+		protected set;
+	}
+
+	public int Deaths{
+		get;
+		protected set;
+	}
 
 
 	protected void UpdateSavedLabel(){
-		savedLabel.Text = "SAVED:\t" + _saved.ToString();
+		savedLabel.Text = "SAVED:\t" + Saved.ToString();
 	}
 	protected void UpdateDeathsLabel(){
-		deathsLabel.Text = "DEATHS:\t" + _deaths.ToString();
+		deathsLabel.Text = "DEATHS:\t" + Deaths.ToString();
 	}
 	protected void UpdateProfitLabel(){
-		profitLabel.Text = "PROFIT:\t$" + _profit.ToString();
+		profitLabel.Text = "PROFIT:\t$" + Profit.ToString();
 	}
 
 	public void IncrementSaved(){
-		_saved++;
+		Saved++;
 		UpdateSavedLabel();
 	}
 	public void DecrementSaved(){
-		_saved--;
+		Saved--;
 		UpdateSavedLabel();
 	}
 	public void IncrementProfit(int amount){
-		_profit += amount;
+		Profit += amount;
 		UpdateProfitLabel();
 	}
 
 	public void DecrementProfit(int amount){
-		_profit -= amount;
+		Profit -= amount;
 		UpdateProfitLabel();
 	}
 
 	public void IncrementDeaths(){
-		_deaths++;
+		Deaths++;
 		UpdateDeathsLabel();
 	}
 
 	public void DecrementDeaths(){
-		_deaths--;
+		Deaths--;
 		UpdateDeathsLabel();
+	}
+
+	public void HideLabels(){
+		profitLabel.Hide();
+		savedLabel.Hide();
+		deathsLabel.Hide();
 	}
 
 

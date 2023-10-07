@@ -7,6 +7,7 @@ public partial class AnimatedState: BaseState{
 
     public override void Enter(){
         base.Enter();
+        animationPlayer ??= GetNode<AnimationPlayer>("%AnimationPlayer");
         animationPlayer.Play(animationName);
     }
 

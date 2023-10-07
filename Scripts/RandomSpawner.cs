@@ -12,8 +12,8 @@ public partial class RandomSpawner : Node3D
 	private Node3D _playerNode;
 	public override void _Ready()
 	{
-		RandomlySpawn();
 		_playerNode = GetTree().GetNodesInGroup("Player")[0] as Node3D;
+		RandomlySpawn();
 	}
 
 	public void RandomlySpawn(){
