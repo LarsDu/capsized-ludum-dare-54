@@ -91,7 +91,7 @@ skeleton = NodePath("")
 surface_material_override/0 = ExtResource("3_wq127")
 
 [node name="Passenger" parent="Camera3D" instance=ExtResource("5_618fp")]
-transform = Transform3D(-0.96005, -0.00315496, -0.279811, 0, 0.999936, -0.0112746, 0.279829, -0.0108242, -0.959988, -13.1078, -11.2822, -26.1192)
+transform = Transform3D(-1, -9.15472e-10, -8.74179e-08, 0, 0.999945, -0.0104718, 8.74228e-08, -0.0104718, -0.999944, -13.1078, -11.2822, -26.1192)
 
 [node name="Iceberg" type="MeshInstance3D" parent="."]
 transform = Transform3D(-0.408958, 0, 1.95774, 0, 2, 0, -1.95774, 0, -0.408958, 733.771, 52.4331, 682.836)

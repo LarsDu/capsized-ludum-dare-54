@@ -28,7 +28,6 @@ public partial class ClimbState : AnimatedState
         passenger.Velocity = new Vector3(0.0f, speed, 0.0f);
         float distanceTraveled = (passenger.GlobalPosition - _startPosition).Length();
         if(distanceTraveled > climbDistance){
-            GD.Print("ClimbState: Reached top of ladder");
             Exit();
         }
         passenger.MoveAndSlide();

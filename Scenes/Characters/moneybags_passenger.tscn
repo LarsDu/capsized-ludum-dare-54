@@ -8,7 +8,10 @@ resource_local_to_scene = true
 radius = 5.798
 
 [node name="Passenger" node_paths=PackedStringArray("mesh") instance=ExtResource("1_x7a6w")]
+minWealth = 500
+maxWealth = 999
 mesh = NodePath("humanoid_armature/Skeleton3D/MeshInstance3D")
+randomizeColor = false
 
 [node name="Skeleton3D" parent="humanoid_armature" index="0"]
 bones/0/position = Vector3(0, 1.83738, 0)
@@ -27,7 +30,6 @@ bones/9/rotation = Quaternion(0.332958, 0.0842344, 0.590222, 0.730535)
 bones/10/rotation = Quaternion(0.697791, 0.122411, 0.251096, 0.659587)
 bones/11/rotation = Quaternion(0.0125179, 0.0450427, 0.174983, 0.983461)
 bones/12/rotation = Quaternion(-0.119736, 0.687715, 0.710567, 0.0883609)
-bones/12/scale = Vector3(1, 1, 1)
 bones/13/rotation = Quaternion(-0.581913, 1.71163e-05, 0.00257704, 0.813247)
 bones/14/rotation = Quaternion(0.531075, 0.0640265, 0.0787114, 0.841228)
 bones/15/rotation = Quaternion(-0.137293, 0.710227, 0.677632, 0.132447)
@@ -47,6 +49,9 @@ mesh = ExtResource("2_41g2p")
 
 [node name="SeatedState" parent="StateMachine" index="0"]
 animationName = "clap"
+
+[node name="ClimbState" parent="StateMachine" index="7"]
+speed = 5.0
 
 [node name="CollisionShape3D" parent="." index="4"]
 shape = SubResource("SphereShape3D_cqchu")

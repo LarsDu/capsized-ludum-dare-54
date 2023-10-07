@@ -11,18 +11,45 @@ public partial class ScoreManager : Node
 	private int _saved = 0;
 	private int _deaths = 0;
 
-	public void IncrementSaved(){
-		_saved++;
+
+
+	protected void UpdateSavedLabel(){
 		savedLabel.Text = "SAVED:\t" + _saved.ToString();
 	}
+	protected void UpdateDeathsLabel(){
+		deathsLabel.Text = "DEATHS:\t" + _deaths.ToString();
+	}
+	protected void UpdateProfitLabel(){
+		profitLabel.Text = "PROFIT:\t$" + _profit.ToString();
+	}
 
+	public void IncrementSaved(){
+		_saved++;
+		UpdateSavedLabel();
+	}
+	public void DecrementSaved(){
+		_saved--;
+		UpdateSavedLabel();
+	}
 	public void IncrementProfit(int amount){
 		_profit += amount;
-		profitLabel.Text = "PROFIT:\t$" + _profit.ToString();
+		UpdateProfitLabel();
+	}
+
+	public void DecrementProfit(int amount){
+		_profit -= amount;
+		UpdateProfitLabel();
 	}
 
 	public void IncrementDeaths(){
 		_deaths++;
-		deathsLabel.Text = "DEATHS:\t" + _deaths.ToString();
+		UpdateDeathsLabel();
 	}
+
+	public void DecrementDeaths(){
+		_deaths--;
+		UpdateDeathsLabel();
+	}
+
+
 }

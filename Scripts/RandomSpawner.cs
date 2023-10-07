@@ -25,7 +25,6 @@ public partial class RandomSpawner : Node3D
 				GD.Print("RandomSpawner: Could not instantiate scene at index: " + randomIndex);
 				continue;
 			}
-			AddChild(instance);
 
 			Vector3 spawnRange = new Vector3((float)GD.RandRange(-radius, radius), 0.0f, (float)GD.RandRange(-radius, radius));
 			Vector3 globalSpawnPosition = GlobalTransform.Origin + spawnRange;
@@ -36,6 +35,8 @@ public partial class RandomSpawner : Node3D
 				}
 			}
 			instance.GlobalPosition = globalSpawnPosition;
+			instance.RotateY((float)GD.RandRange(0, 360));
+			AddChild(instance);
 
 		}
 	}

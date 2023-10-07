@@ -8,6 +8,9 @@ public partial class BoatArea3D : Area3D
 	[Export] Array<Seat> seats;
 	[Export] PassengerState passengerStateOnBoard = PassengerState.Cheering;
 	[Signal] public delegate void PassengerBoardedEventHandler();
+	[Signal] public delegate void PassengerEjectedEventHandler();
+	[Signal] public delegate void PassengerWealthInEventHandler(int value);
+	[Signal] public delegate void PassengerWealthOutEventHandler(int value);
 
     public override void _Ready()
     {
@@ -58,6 +61,7 @@ public partial class BoatArea3D : Area3D
 				seat.Passenger = newPassenger;
 				seat.Passenger.PassengerState = passengerStateOnBoard;
 				EmitSignal(SignalName.PassengerBoarded);
+				EmitSignal(SignalName.PassengerWealthIn, seat.Passenger.wealth);
 				isBoatFull = false;
 				break;
 			}
@@ -67,6 +71,8 @@ public partial class BoatArea3D : Area3D
 			Node3D nearest = FindNearest(newPassenger, seats);
 			Seat nearestSeat = nearest as Seat;
 			nearestSeat.Passenger.PassengerState = PassengerState.Ejecting;
+			EmitSignal(SignalName.PassengerEjected);
+			EmitSignal(SignalName.PassengerWealthOut, nearestSeat.Passenger.wealth);
 			nearestSeat.Passenger = newPassenger;
 			nearestSeat.Passenger.PassengerState = passengerStateOnBoard;
 		}

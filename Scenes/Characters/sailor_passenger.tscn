@@ -1,4 +1,4 @@
-[gd_scene load_steps=26 format=3 uid="uid://bqsoajho14s0w"]
+[gd_scene load_steps=27 format=3 uid="uid://bqsoajho14s0w"]
 
 [ext_resource type="Script" path="res://Scripts/Passenger.cs" id="1_iyx0b"]
 [ext_resource type="ArrayMesh" uid="uid://cetw1cx3qnbx8" path="res://Meshes/characters/sailor.res" id="2_24us4"]
@@ -16,6 +16,7 @@
 [ext_resource type="Script" path="res://Scripts/StateMachine/SwimAtPlayerState.cs" id="11_8qec6"]
 [ext_resource type="Script" path="res://Scripts/StateMachine/WanderState.cs" id="12_0lws7"]
 [ext_resource type="Script" path="res://Scripts/StateMachine/CheerState.cs" id="14_j6swk"]
+[ext_resource type="Script" path="res://Scripts/Billboard.cs" id="18_auq7s"]
 [ext_resource type="Script" path="res://Scripts/StateMachine/ClimbState.cs" id="18_bquit"]
 
 [sub_resource type="Skin" id="Skin_5makw"]
@@ -1004,14 +1005,16 @@ _data = {
 resource_local_to_scene = true
 radius = 5.798
 
-[node name="Passenger" type="CharacterBody3D" node_paths=PackedStringArray("stateMachine", "animationPlayer", "mesh", "flailingState", "sittingState", "ejectingState", "leavingState", "seekingState", "cheeringState", "climbingState", "lifeRingMesh") groups=["Passenger"]]
+[node name="Passenger" type="CharacterBody3D" node_paths=PackedStringArray("moneyLabel", "animationPlayer", "mesh", "lifeRingMesh", "stateMachine", "flailingState", "sittingState", "ejectingState", "leavingState", "seekingState", "cheeringState", "climbingState") groups=["Passenger"]]
 transform = Transform3D(1, 0, 0, 0, 0.999936, -0.0112746, 0, 0.0112746, 0.999936, 0, 0, 0)
 platform_floor_layers = 0
 script = ExtResource("1_iyx0b")
-setRandomPassengerType = true
-stateMachine = NodePath("StateMachine")
+maxWealth = 5
+moneyLabel = NodePath("Billboard/MoneyLabel")
 animationPlayer = NodePath("AnimationPlayer")
 mesh = NodePath("humanoid_armature/Skeleton3D/humanoid_template")
+lifeRingMesh = NodePath("Lifering")
+stateMachine = NodePath("StateMachine")
 flailingState = NodePath("StateMachine/FlailingState")
 sittingState = NodePath("StateMachine/SeatedState")
 ejectingState = NodePath("StateMachine/KickedOffBoatState")
@@ -1019,7 +1022,6 @@ leavingState = NodePath("StateMachine/KickedOffBoatState")
 seekingState = NodePath("StateMachine/SwimAtPlayerState")
 cheeringState = NodePath("StateMachine/CheerState")
 climbingState = NodePath("StateMachine/ClimbState")
-lifeRingMesh = NodePath("Lifering")
 
 [node name="humanoid_armature" type="Node3D" parent="."]
 
@@ -1249,10 +1251,19 @@ animationName = "cheer"
 script = ExtResource("18_bquit")
 passenger = NodePath("../..")
 drowningState = NodePath("../DrowningState")
-speed = 2.0
+speed = 15.0
 animationPlayer = NodePath("../../AnimationPlayer")
 animationName = "climb"
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4.36, 0)
 shape = SubResource("SphereShape3D_fwu14")
+
+[node name="Billboard" type="Node3D" parent="."]
+script = ExtResource("18_auq7s")
+
+[node name="MoneyLabel" type="Label3D" parent="Billboard"]
+unique_name_in_owner = true
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 13.7498, -0.155034)
+text = "$100"
+font_size = 352

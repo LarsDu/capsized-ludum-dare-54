@@ -26,20 +26,16 @@ bones/9/rotation = Quaternion(0.0113657, -0.00472843, -0.384081, 0.923217)
 bones/10/rotation = Quaternion(-0.0122871, -0.000751508, -0.0610448, 0.998059)
 bones/11/rotation = Quaternion(-2.64087e-08, -6.58225e-08, 0.160926, 0.986966)
 bones/12/rotation = Quaternion(-0.00055566, 0.121465, 0.992595, 0.00123727)
-bones/12/scale = Vector3(1, 1, 1)
 bones/13/rotation = Quaternion(-0.255855, 2.03602e-05, 0.00113307, 0.966715)
 bones/14/rotation = Quaternion(0.61661, 0.0560997, 0.112511, 0.777165)
 bones/15/rotation = Quaternion(-0.000555839, -0.121466, -0.992595, 0.00123731)
-bones/15/scale = Vector3(1, 1, 1)
 bones/16/rotation = Quaternion(-0.255856, -2.03362e-05, -0.00113308, 0.966714)
 bones/17/rotation = Quaternion(0.511619, 0.100311, 0.196693, 0.830359)
-bones/19/position = Vector3(-0.935141, 0.468867, 0.0710243)
 bones/19/rotation = Quaternion(0.110214, 0.797547, 0.590006, 0.0605334)
-bones/21/position = Vector3(0.935141, 0.468867, 0.0710243)
 bones/21/rotation = Quaternion(0.193429, 0.847314, 0.483071, 0.106238)
 
-[node name="ClimbState" parent="StateMachine" index="7" node_paths=PackedStringArray("drowningState")]
-drowningState = NodePath("../DrowningState")
+[node name="ClimbState" parent="StateMachine" index="7"]
+speed = 16.0
 
 [node name="CollisionShape3D" parent="." index="4"]
 shape = SubResource("SphereShape3D_0v3ek")

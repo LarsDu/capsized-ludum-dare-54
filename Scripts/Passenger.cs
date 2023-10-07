@@ -20,14 +20,22 @@ public enum PassengerState{
 
 public partial class Passenger : CharacterBody3D
 {
-	[Export] bool setRandomPassengerType = false;
-	[Export] bool randomizeColor = true;
-	[Export] float hueRange = 0.4f;
-	[Export] StateMachine stateMachine;
+	[ExportCategory("Wealth")]
+	[Export] int minWealth = 1;
+	[Export] int maxWealth = 20;
+	public int wealth = 0;
+	[Export] protected Label3D moneyLabel;
+
+	[ExportCategory("Visuals")]
 	[Export] AnimationPlayer animationPlayer;
 	[Export] MeshInstance3D mesh;
+	[Export] protected Node3D lifeRingMesh;
+	[Export] bool randomizeColor = true;
+	[Export] float hueRange = 0.4f;
 
 	[ExportCategory("States")]
+	[Export] StateMachine stateMachine;
+
 	[Export] private PassengerState _passengerState = PassengerState.Flailing;
 	public PassengerState PassengerState{
 		get => _passengerState;
@@ -54,36 +62,25 @@ public partial class Passenger : CharacterBody3D
 	[Export] protected ClimbState climbingState;
 
 	protected Dictionary<PassengerState, BaseState> passengerStateMap = new Dictionary<PassengerState, BaseState>();
-	
 
-	[ExportCategory("Meshes")]
-	[Export] protected Node3D lifeRingMesh;
 
 	protected Seat lastSeat;
 	public override void _Ready()
 	{
 
 		PopulatePassengerStateMap();
-		if(animationPlayer == null){
-			animationPlayer = GetNode<AnimationPlayer>("AnimationPlayer");
-		}
-	
+
+		animationPlayer ??= GetNode<AnimationPlayer>("AnimationPlayer");
+		
+
 		if(mesh != null && randomizeColor){
-			// https://www.reddit.com/r/godot/comments/15qvust/albedo_color_isnt_a_property_of_material_godot_41/
-			// Override material with a random albedo color
-			//var overrideMaterial = new StandardMaterial3D();
-			var activeMaterial = mesh.GetActiveMaterial(0);
-			var overrideMaterial = activeMaterial.Duplicate() as StandardMaterial3D;
-			overrideMaterial.AlbedoColor = new Color(
-				(float) Mathf.Clamp( overrideMaterial.AlbedoColor.R +  GD.RandRange(-hueRange, hueRange), 0.0, 1.0f),
-				(float) Mathf.Clamp( overrideMaterial.AlbedoColor.G +  GD.RandRange(-hueRange, hueRange), 0.0, 1.0f),
-				(float) Mathf.Clamp( overrideMaterial.AlbedoColor.B +  GD.RandRange(-hueRange, hueRange), 0.0, 1.0f),
-				1.0f
-			);
-			mesh.SetSurfaceOverrideMaterial(0, overrideMaterial);
+			RandomizeColor();
 		}
+
+		DetermineWealth();
 		PassengerState = _passengerState;
 	}
+
 	protected void PopulatePassengerStateMap(){
 		passengerStateMap = new Dictionary<PassengerState, BaseState>(){
 			{PassengerState.Flailing, flailingState},
@@ -95,6 +92,39 @@ public partial class Passenger : CharacterBody3D
 			{PassengerState.Climbing, climbingState},
 
 		};
+	}
+
+	protected void DetermineWealth(){
+		wealth = GD.RandRange(minWealth, maxWealth);
+		if(moneyLabel == null){
+			moneyLabel = GetNode<Label3D>("%MoneyLabel");
+			GD.Print("MoneyLabel: " + moneyLabel);
+		}
+		// Set color to be more red when poor and more green when wealthier
+		/*
+		moneyLabel.AddColorOverride("font_color", new Color(
+			(float) Mathf.Clamp( 1.0f - (wealth / (float) maxWealth), 0.0, 1.0f),
+			(float) Mathf.Clamp( wealth / (float) maxWealth, 0.0, 1.0f),
+			0.0f,
+			1.0f
+		));
+		*/
+		moneyLabel.Text = "$" + wealth.ToString();
+	}
+
+	protected void RandomizeColor(){
+		// https://www.reddit.com/r/godot/comments/15qvust/albedo_color_isnt_a_property_of_material_godot_41/
+		// Override material with a random albedo color
+		//var overrideMaterial = new StandardMaterial3D();
+		var activeMaterial = mesh.GetActiveMaterial(0);
+		var overrideMaterial = activeMaterial.Duplicate() as StandardMaterial3D;
+		overrideMaterial.AlbedoColor = new Color(
+			(float) Mathf.Clamp( overrideMaterial.AlbedoColor.R +  GD.RandRange(-hueRange, hueRange), 0.0, 1.0f),
+			(float) Mathf.Clamp( overrideMaterial.AlbedoColor.G +  GD.RandRange(-hueRange, hueRange), 0.0, 1.0f),
+			(float) Mathf.Clamp( overrideMaterial.AlbedoColor.B +  GD.RandRange(-hueRange, hueRange), 0.0, 1.0f),
+			1.0f
+		);
+		mesh.SetSurfaceOverrideMaterial(0, overrideMaterial);
 	}
 
 

@@ -8,6 +8,8 @@ resource_local_to_scene = true
 radius = 5.798
 
 [node name="Passenger" node_paths=PackedStringArray("mesh") instance=ExtResource("1_7fj7i")]
+minWealth = 20
+maxWealth = 40
 mesh = NodePath("humanoid_armature/Skeleton3D/MeshInstance3D")
 
 [node name="humanoid_template" parent="humanoid_armature/Skeleton3D" index="0"]
@@ -15,6 +17,9 @@ visible = false
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="humanoid_armature/Skeleton3D" index="1"]
 mesh = ExtResource("2_ikjl4")
+
+[node name="ClimbState" parent="StateMachine" index="7"]
+speed = 12.0
 
 [node name="CollisionShape3D" parent="." index="4"]
 shape = SubResource("SphereShape3D_ctirh")
