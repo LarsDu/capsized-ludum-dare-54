@@ -16,12 +16,11 @@ public partial class Seat : Node3D
 			var oldPassenger = _passenger;
 			_passenger = value;
 			if(_passenger != null && oldPassenger != _passenger){
-				
-				//_passenger.CollisionLayer = 0;
-				//_passenger.CollisionMask = 0;
 				seatAttachmentTransform.RemotePath = _passenger.GetPath(); // Do not use reparenting
-				_passenger.SetSeatAttachmentTransform(seatAttachmentTransform); // Fixme record last seat instead
+			} else {
+				seatAttachmentTransform.RemotePath = null;
 			}
+			_passenger?.SetLastSeat(this);
 		
 		}
 		get{

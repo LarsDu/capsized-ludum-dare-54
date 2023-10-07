@@ -51,7 +51,7 @@ public partial class Passenger : CharacterBody3D
 	[Export] protected BaseState leavingState;
 	[Export] protected BaseState seekingState;
 	[Export] protected BaseState cheeringState;
-	[Export] protected BaseState climbingState;
+	[Export] protected ClimbState climbingState;
 
 	protected Dictionary<PassengerState, BaseState> passengerStateMap = new Dictionary<PassengerState, BaseState>();
 	
@@ -59,7 +59,7 @@ public partial class Passenger : CharacterBody3D
 	[ExportCategory("Meshes")]
 	[Export] protected Node3D lifeRingMesh;
 
-	public RemoteTransform3D lastSeatAttachmentTransform;
+	protected Seat lastSeat;
 	public override void _Ready()
 	{
 
@@ -99,14 +99,21 @@ public partial class Passenger : CharacterBody3D
 
 
 
-	public void SetSeatAttachmentTransform(
-		RemoteTransform3D seatAttachmentTransform
+	public void SetLastSeat(
+		Seat seat
 	){
-		if(lastSeatAttachmentTransform != null){
-			// Detach from any old seat
-			lastSeatAttachmentTransform.RemotePath = null;
+		if(lastSeat != null){
+			// Detach from any old seat and remote transforms
+			lastSeat.Passenger = null;
 		}
-		lastSeatAttachmentTransform = seatAttachmentTransform;
+		// Replace the memory of the lastSeat
+		lastSeat = seat;
+	}
+
+	public void SetClimingDistance(float distance){
+		if(climbingState == null)
+			GD.PushError("climbingState is null");
+		climbingState.climbDistance = distance;
 	}
 
 }

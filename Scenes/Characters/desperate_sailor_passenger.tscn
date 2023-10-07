@@ -1,0 +1,45 @@
+[gd_scene load_steps=3 format=3 uid="uid://dy2acbfwk1uhf"]
+
+[ext_resource type="PackedScene" uid="uid://bqsoajho14s0w" path="res://Scenes/Characters/sailor_passenger.tscn" id="1_ocfcx"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_0v3ek"]
+resource_local_to_scene = true
+radius = 5.798
+
+[node name="Passenger" instance=ExtResource("1_ocfcx")]
+_passengerState = 4
+
+[node name="Skeleton3D" parent="humanoid_armature" index="0"]
+bones/0/position = Vector3(0, 2.80901, 0)
+bones/0/rotation = Quaternion(0, 1, 2.98023e-08, 7.54979e-08)
+bones/1/rotation = Quaternion(-3.55271e-15, 1.19209e-07, -4.23516e-22, 1)
+bones/2/rotation = Quaternion(6.81597e-22, -1.19209e-07, -4.23516e-22, 1)
+bones/3/rotation = Quaternion(-3.90429e-22, 1.19209e-07, -2.11758e-22, 1)
+bones/4/position = Vector3(0.699666, 1.0151, -0.0360644)
+bones/4/rotation = Quaternion(-1.12216e-07, 3.56396e-08, -0.818311, 0.574776)
+bones/5/rotation = Quaternion(0.0110317, 0.00546263, 0.443719, 0.896081)
+bones/6/rotation = Quaternion(-0.0122871, 0.000751508, 0.0610448, 0.998059)
+bones/7/rotation = Quaternion(-2.53488e-08, 6.5916e-08, -0.160926, 0.986966)
+bones/8/position = Vector3(-0.699666, 1.0151, -0.0360642)
+bones/8/rotation = Quaternion(1.1826e-08, 5.1833e-08, 0.818311, 0.574776)
+bones/9/rotation = Quaternion(0.0113657, -0.00472843, -0.384081, 0.923217)
+bones/10/rotation = Quaternion(-0.0122871, -0.000751508, -0.0610448, 0.998059)
+bones/11/rotation = Quaternion(-2.64087e-08, -6.58225e-08, 0.160926, 0.986966)
+bones/12/rotation = Quaternion(-0.00055566, 0.121465, 0.992595, 0.00123727)
+bones/12/scale = Vector3(1, 1, 1)
+bones/13/rotation = Quaternion(-0.255855, 2.03602e-05, 0.00113307, 0.966715)
+bones/14/rotation = Quaternion(0.61661, 0.0560997, 0.112511, 0.777165)
+bones/15/rotation = Quaternion(-0.000555839, -0.121466, -0.992595, 0.00123731)
+bones/15/scale = Vector3(1, 1, 1)
+bones/16/rotation = Quaternion(-0.255856, -2.03362e-05, -0.00113308, 0.966714)
+bones/17/rotation = Quaternion(0.511619, 0.100311, 0.196693, 0.830359)
+bones/19/position = Vector3(-0.935141, 0.468867, 0.0710243)
+bones/19/rotation = Quaternion(0.110214, 0.797547, 0.590006, 0.0605334)
+bones/21/position = Vector3(0.935141, 0.468867, 0.0710243)
+bones/21/rotation = Quaternion(0.193429, 0.847314, 0.483071, 0.106238)
+
+[node name="ClimbState" parent="StateMachine" index="7" node_paths=PackedStringArray("drowningState")]
+drowningState = NodePath("../DrowningState")
+
+[node name="CollisionShape3D" parent="." index="4"]
+shape = SubResource("SphereShape3D_0v3ek")

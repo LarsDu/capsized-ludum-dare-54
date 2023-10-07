@@ -8,9 +8,12 @@ public partial class RandomSpawner : Node3D
 	[Export] int maxSpawn = 40;
 	[Export] float radius = 100.0f;
 	// Called when the node enters the scene tree for the first time.
+
+	private Node3D _playerNode;
 	public override void _Ready()
 	{
 		RandomlySpawn();
+		_playerNode = GetTree().GetNodesInGroup("Player")[0] as Node3D;
 	}
 
 	public void RandomlySpawn(){
@@ -24,7 +27,14 @@ public partial class RandomSpawner : Node3D
 			}
 			AddChild(instance);
 
-			Vector3 globalSpawnPosition = new Vector3((float)GD.RandRange(-radius, radius), 0.0f, (float)GD.RandRange(-radius, radius));
+			Vector3 spawnRange = new Vector3((float)GD.RandRange(-radius, radius), 0.0f, (float)GD.RandRange(-radius, radius));
+			Vector3 globalSpawnPosition = GlobalTransform.Origin + spawnRange;
+			if(_playerNode != null){
+				// Do not spawn too close to the player
+				while(globalSpawnPosition.DistanceTo(_playerNode.GlobalPosition) < 20.0f){
+					globalSpawnPosition = GlobalTransform.Origin + new Vector3((float)GD.RandRange(-radius, radius), 0.0f, (float)GD.RandRange(-radius, radius));
+				}
+			}
 			instance.GlobalPosition = globalSpawnPosition;
 
 		}

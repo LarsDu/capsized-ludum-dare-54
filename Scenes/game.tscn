@@ -1,4 +1,4 @@
-[gd_scene load_steps=29 format=3 uid="uid://ksyeh4c4ja6d"]
+[gd_scene load_steps=32 format=3 uid="uid://ksyeh4c4ja6d"]
 
 [ext_resource type="Material" uid="uid://co481815cj85w" path="res://Materials/water_shaded.tres" id="1_30glw"]
 [ext_resource type="PackedScene" uid="uid://dkrjsaoks54vx" path="res://Scenes/player_lifeboat.tscn" id="2_14251"]
@@ -12,10 +12,12 @@
 [ext_resource type="Script" path="res://Scripts/Player/Seat.cs" id="5_ejdmq"]
 [ext_resource type="PackedScene" uid="uid://bfecwfbote4pu" path="res://Scenes/Characters/moneybags_passenger.tscn" id="5_qknx4"]
 [ext_resource type="PackedScene" uid="uid://b40s04tyr48s2" path="res://Scenes/Characters/lady_passenger.tscn" id="6_twyj0"]
+[ext_resource type="PackedScene" uid="uid://dy2acbfwk1uhf" path="res://Scenes/Characters/desperate_sailor_passenger.tscn" id="7_a4e3i"]
 [ext_resource type="Script" path="res://Scripts/Countdown.cs" id="7_c5ja2"]
 [ext_resource type="ArrayMesh" uid="uid://cyx53lvu0xjw1" path="res://Meshes/iceberg.res" id="7_t1x2n"]
 [ext_resource type="Script" path="res://Scripts/GameOver.cs" id="8_27vvt"]
 [ext_resource type="Script" path="res://Scripts/UI/SceneReloadButton.cs" id="9_kd3l7"]
+[ext_resource type="Script" path="res://Scripts/LadderArea3D.cs" id="10_tfu4a"]
 [ext_resource type="Script" path="res://Scripts/Scoring/ScoreManager.cs" id="11_w3wq3"]
 
 [sub_resource type="PhysicalSkyMaterial" id="PhysicalSkyMaterial_5tdke"]
@@ -41,10 +43,12 @@ resource_local_to_scene = true
 data = PackedVector3Array(1, 0, 1, -1, 0, 1, 1, 0, -1, -1, 0, 1, -1, 0, -1, 1, 0, -1)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_bbnwk"]
-size = Vector3(100, 71.75, 400)
+size = Vector3(100, 71.75, 428.125)
 
-[sub_resource type="SphereShape3D" id="SphereShape3D_s4huf"]
-radius = 88.886
+[sub_resource type="SphereShape3D" id="SphereShape3D_pgbet"]
+radius = 18.169
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_xlk0d"]
 
 [sub_resource type="Theme" id="Theme_wfdpi"]
 
@@ -70,9 +74,9 @@ shape = SubResource("ConcavePolygonShape3D_jnlv6")
 
 [node name="LifeRingsRandomSpawner" type="Node3D" parent="."]
 script = ExtResource("4_ffa1u")
-packedScenes = Array[PackedScene]([ExtResource("3_t7uka"), ExtResource("4_4s8ax"), ExtResource("5_qknx4"), ExtResource("6_twyj0")])
-maxSpawn = 60
-radius = 200.0
+packedScenes = Array[PackedScene]([ExtResource("3_t7uka"), ExtResource("4_4s8ax"), ExtResource("5_qknx4"), ExtResource("6_twyj0"), ExtResource("7_a4e3i")])
+maxSpawn = 115
+radius = 190.0
 
 [node name="Passenger" parent="LifeRingsRandomSpawner" instance=ExtResource("3_t7uka")]
 transform = Transform3D(1, 0, 0, 0, 0.999936, -0.0112746, 0, 0.0112746, 0.999936, 0, 0, 6.68085)
@@ -92,138 +96,228 @@ skeleton = NodePath("")
 surface_material_override/0 = ExtResource("3_dhs85")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="RescueBoatBody"]
-transform = Transform3D(-0.992272, 0, 0.124086, 0, 1, 0, -0.124086, 0, -0.992272, 0, 32.175, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 32.175, 0)
 shape = SubResource("BoxShape3D_bbnwk")
 
-[node name="RescueLadderArea3D" type="Area3D" parent="RescueBoatBody" node_paths=PackedStringArray("seats")]
+[node name="RescueLadderArea3D" type="Area3D" parent="RescueBoatBody"]
+transform = Transform3D(-0.126649, 0, 0.991949, 0, 1, 0, -0.991949, 0, -0.126649, 43.9326, -1.01707, -128.385)
+collision_layer = 2
+collision_mask = 2
+script = ExtResource("10_tfu4a")
+height = 45.0
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="RescueBoatBody/RescueLadderArea3D"]
+transform = Transform3D(1, 0, -7.45058e-09, 0, 1, 0, 7.45058e-09, 0, 1, 0, 0, 0.762573)
+shape = SubResource("SphereShape3D_pgbet")
+
+[node name="RescueArea3D" type="Area3D" parent="RescueBoatBody" node_paths=PackedStringArray("seats")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -17.3382, 0, -120.667)
 collision_layer = 2
 collision_mask = 2
 script = ExtResource("4_7347x")
 seats = []
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="RescueBoatBody/RescueLadderArea3D"]
-shape = SubResource("SphereShape3D_s4huf")
+[node name="CollisionShape3D" type="CollisionShape3D" parent="RescueBoatBody/RescueArea3D"]
+transform = Transform3D(-1.19209e-06, 0, 14.195, 0, 10, 0, -21.43, 0, -8.34465e-07, 53.7855, 54.2836, -7.66384)
+shape = SubResource("BoxShape3D_xlk0d")
 
-[node name="Seat" type="Node3D" parent="RescueBoatBody/RescueLadderArea3D"]
-transform = Transform3D(0.990302, 0, -0.138931, 0, 1, 0, 0.138931, 0, 0.990302, -7.07822, 44.1028, 24.0079)
+[node name="Seat" type="Node3D" parent="RescueBoatBody/RescueArea3D"]
+transform = Transform3D(0.990302, 0, -0.138931, 0, 1, 0, 0.138931, 0, 0.990302, 46.248, 47.9508, -8.46792)
 script = ExtResource("5_ejdmq")
 
-[node name="RemoteTransform3D" type="RemoteTransform3D" parent="RescueBoatBody/RescueLadderArea3D/Seat"]
+[node name="RemoteTransform3D" type="RemoteTransform3D" parent="RescueBoatBody/RescueArea3D/Seat"]
 
-[node name="Seat2" type="Node3D" parent="RescueBoatBody/RescueLadderArea3D"]
-transform = Transform3D(0.990302, 0, -0.138931, 0, 1, 0, 0.138931, 0, 0.990302, -8.73456, 44.1028, 35.8143)
+[node name="Seat2" type="Node3D" parent="RescueBoatBody/RescueArea3D"]
+transform = Transform3D(0.990303, 0, -0.138931, 0, 1, 0, 0.138931, 0, 0.990303, 35.0337, 46.7232, -11.2652)
 script = ExtResource("5_ejdmq")
 
-[node name="RemoteTransform3D" type="RemoteTransform3D" parent="RescueBoatBody/RescueLadderArea3D/Seat2"]
+[node name="RemoteTransform3D" type="RemoteTransform3D" parent="RescueBoatBody/RescueArea3D/Seat2"]
 
-[node name="Seat3" type="Node3D" parent="RescueBoatBody/RescueLadderArea3D"]
-transform = Transform3D(0.990302, 0, -0.138931, 0, 1, 0, 0.138931, 0, 0.990302, -11.0811, 44.1028, 52.5403)
+[node name="Seat3" type="Node3D" parent="RescueBoatBody/RescueArea3D"]
+transform = Transform3D(0.990302, 0, -0.138931, 0, 1, 0, 0.138931, 0, 0.990302, 38.4376, 44.1028, 59.4874)
 script = ExtResource("5_ejdmq")
 
-[node name="RemoteTransform3D" type="RemoteTransform3D" parent="RescueBoatBody/RescueLadderArea3D/Seat3"]
+[node name="RemoteTransform3D" type="RemoteTransform3D" parent="RescueBoatBody/RescueArea3D/Seat3"]
 
-[node name="Seat4" type="Node3D" parent="RescueBoatBody/RescueLadderArea3D"]
-transform = Transform3D(0.990302, 0, -0.138931, 0, 1, 0, 0.138931, 0, 0.990302, -12.7482, 44.1028, 64.4239)
+[node name="Seat4" type="Node3D" parent="RescueBoatBody/RescueArea3D"]
+transform = Transform3D(0.990303, 0, -0.138931, 0, 1, 0, 0.138931, 0, 0.990303, 38.2484, 42.9552, -21.8464)
 script = ExtResource("5_ejdmq")
 
-[node name="RemoteTransform3D" type="RemoteTransform3D" parent="RescueBoatBody/RescueLadderArea3D/Seat4"]
+[node name="RemoteTransform3D" type="RemoteTransform3D" parent="RescueBoatBody/RescueArea3D/Seat4"]
 
-[node name="Seat5" type="Node3D" parent="RescueBoatBody/RescueLadderArea3D"]
-transform = Transform3D(0.990302, 0, -0.138931, 0, 1, 0, 0.138931, 0, 0.990302, -13.5818, 44.1028, 70.3657)
+[node name="Seat5" type="Node3D" parent="RescueBoatBody/RescueArea3D"]
+transform = Transform3D(0.990303, 0, -0.138931, 0, 1, 0, 0.138931, 0, 0.990303, 33.3202, 44.3743, -21.7597)
 script = ExtResource("5_ejdmq")
 
-[node name="RemoteTransform3D" type="RemoteTransform3D" parent="RescueBoatBody/RescueLadderArea3D/Seat5"]
+[node name="RemoteTransform3D" type="RemoteTransform3D" parent="RescueBoatBody/RescueArea3D/Seat5"]
 
-[node name="Seat6" type="Node3D" parent="RescueBoatBody/RescueLadderArea3D"]
-transform = Transform3D(0.990302, 0, -0.138931, 0, 1, 0, 0.138931, 0, 0.990302, -14.6945, 44.1028, 78.2967)
+[node name="Seat6" type="Node3D" parent="RescueBoatBody/RescueArea3D"]
+transform = Transform3D(0.990303, 0, -0.138931, 0, 1, 0, 0.138931, 0, 0.990303, 37.1237, 47.9508, -22.531)
 script = ExtResource("5_ejdmq")
 
-[node name="RemoteTransform3D" type="RemoteTransform3D" parent="RescueBoatBody/RescueLadderArea3D/Seat6"]
+[node name="RemoteTransform3D" type="RemoteTransform3D" parent="RescueBoatBody/RescueArea3D/Seat6"]
 
-[node name="Seat7" type="Node3D" parent="RescueBoatBody/RescueLadderArea3D"]
-transform = Transform3D(0.990302, 0, -0.138931, 0, 1, 0, 0.138931, 0, 0.990302, -15.4279, 44.1028, 83.5251)
+[node name="Seat7" type="Node3D" parent="RescueBoatBody/RescueArea3D"]
+transform = Transform3D(0.990303, 0, -0.138931, 0, 1, 0, 0.138931, 0, 0.990303, 25.9093, 46.7232, -25.3284)
 script = ExtResource("5_ejdmq")
 
-[node name="RemoteTransform3D" type="RemoteTransform3D" parent="RescueBoatBody/RescueLadderArea3D/Seat7"]
+[node name="RemoteTransform3D" type="RemoteTransform3D" parent="RescueBoatBody/RescueArea3D/Seat7"]
 
-[node name="Seat8" type="Node3D" parent="RescueBoatBody/RescueLadderArea3D"]
-transform = Transform3D(0.990302, 0, -0.138931, 0, 1, 0, 0.138931, 0, 0.990302, -16.5345, 44.1028, 91.4131)
+[node name="Seat8" type="Node3D" parent="RescueBoatBody/RescueArea3D"]
+transform = Transform3D(0.990303, 0, -0.138931, 0, 1, 0, 0.138931, 0, 0.990303, 29.3132, 44.1028, 45.4243)
 script = ExtResource("5_ejdmq")
 
-[node name="RemoteTransform3D" type="RemoteTransform3D" parent="RescueBoatBody/RescueLadderArea3D/Seat8"]
+[node name="RemoteTransform3D" type="RemoteTransform3D" parent="RescueBoatBody/RescueArea3D/Seat8"]
 
-[node name="Seat9" type="Node3D" parent="RescueBoatBody/RescueLadderArea3D"]
-transform = Transform3D(0.990302, 0, -0.138931, 0, 1, 0, 0.138931, 0, 0.990302, -17.1568, 44.1028, 95.8487)
+[node name="Seat9" type="Node3D" parent="RescueBoatBody/RescueArea3D"]
+transform = Transform3D(0.990303, 0, -0.138931, 0, 1, 0, 0.138931, 0, 0.990303, 29.1241, 42.9552, -35.9095)
 script = ExtResource("5_ejdmq")
 
-[node name="RemoteTransform3D" type="RemoteTransform3D" parent="RescueBoatBody/RescueLadderArea3D/Seat9"]
+[node name="RemoteTransform3D" type="RemoteTransform3D" parent="RescueBoatBody/RescueArea3D/Seat9"]
 
-[node name="Seat10" type="Node3D" parent="RescueBoatBody/RescueLadderArea3D"]
-transform = Transform3D(0.990302, 0, -0.138931, 0, 1, 0, 0.138931, 0, 0.990302, -0.613647, 44.1028, 98.1696)
+[node name="Seat10" type="Node3D" parent="RescueBoatBody/RescueArea3D"]
+transform = Transform3D(0.990303, 0, -0.138931, 0, 1, 0, 0.138931, 0, 0.990303, 24.1957, 44.3743, -35.8229)
 script = ExtResource("5_ejdmq")
 
-[node name="RemoteTransform3D" type="RemoteTransform3D" parent="RescueBoatBody/RescueLadderArea3D/Seat10"]
+[node name="RemoteTransform3D" type="RemoteTransform3D" parent="RescueBoatBody/RescueArea3D/Seat10"]
 
-[node name="Seat11" type="Node3D" parent="RescueBoatBody/RescueLadderArea3D"]
-transform = Transform3D(0.990302, 0, -0.138931, 0, 1, 0, 0.138931, 0, 0.990302, 0.137146, 44.1028, 92.8177)
+[node name="Seat11" type="Node3D" parent="RescueBoatBody/RescueArea3D"]
+transform = Transform3D(0.990303, 0, -0.138931, 0, 1, 0, 0.138931, 0, 0.990303, 22.8785, 47.9508, -24.5295)
 script = ExtResource("5_ejdmq")
 
-[node name="RemoteTransform3D" type="RemoteTransform3D" parent="RescueBoatBody/RescueLadderArea3D/Seat11"]
+[node name="RemoteTransform3D" type="RemoteTransform3D" parent="RescueBoatBody/RescueArea3D/Seat11"]
 
-[node name="Seat12" type="Node3D" parent="RescueBoatBody/RescueLadderArea3D"]
-transform = Transform3D(0.990302, 0, -0.138931, 0, 1, 0, 0.138931, 0, 0.990302, 0.991241, 44.1028, 86.7297)
+[node name="Seat12" type="Node3D" parent="RescueBoatBody/RescueArea3D"]
+transform = Transform3D(0.990303, 0, -0.138931, 0, 1, 0, 0.138931, 0, 0.990303, 11.6642, 46.7232, -27.3268)
 script = ExtResource("5_ejdmq")
 
-[node name="RemoteTransform3D" type="RemoteTransform3D" parent="RescueBoatBody/RescueLadderArea3D/Seat12"]
+[node name="RemoteTransform3D" type="RemoteTransform3D" parent="RescueBoatBody/RescueArea3D/Seat12"]
 
-[node name="Seat13" type="Node3D" parent="RescueBoatBody/RescueLadderArea3D"]
-transform = Transform3D(0.990302, 0, -0.138931, 0, 1, 0, 0.138931, 0, 0.990302, 3.90878, 44.1028, 65.9334)
+[node name="Seat13" type="Node3D" parent="RescueBoatBody/RescueArea3D"]
+transform = Transform3D(0.990303, 0, -0.138931, 0, 1, 0, 0.138931, 0, 0.990303, 15.0681, 44.1028, 43.4258)
 script = ExtResource("5_ejdmq")
 
-[node name="RemoteTransform3D" type="RemoteTransform3D" parent="RescueBoatBody/RescueLadderArea3D/Seat13"]
+[node name="RemoteTransform3D" type="RemoteTransform3D" parent="RescueBoatBody/RescueArea3D/Seat13"]
 
-[node name="Seat14" type="Node3D" parent="RescueBoatBody/RescueLadderArea3D"]
-transform = Transform3D(0.990302, 0, -0.138931, 0, 1, 0, 0.138931, 0, 0.990302, 5.85379, 44.1028, 52.0692)
+[node name="Seat14" type="Node3D" parent="RescueBoatBody/RescueArea3D"]
+transform = Transform3D(0.990303, 0, -0.138931, 0, 1, 0, 0.138931, 0, 0.990303, 14.8789, 42.9552, -37.908)
 script = ExtResource("5_ejdmq")
 
-[node name="RemoteTransform3D" type="RemoteTransform3D" parent="RescueBoatBody/RescueLadderArea3D/Seat14"]
+[node name="RemoteTransform3D" type="RemoteTransform3D" parent="RescueBoatBody/RescueArea3D/Seat14"]
 
-[node name="Seat15" type="Node3D" parent="RescueBoatBody/RescueLadderArea3D"]
-transform = Transform3D(0.990302, 0, -0.138931, 0, 1, 0, 0.138931, 0, 0.990302, 5.51508, 47.1028, 25.6206)
+[node name="Seat15" type="Node3D" parent="RescueBoatBody/RescueArea3D"]
+transform = Transform3D(0.990303, 0, -0.138931, 0, 1, 0, 0.138931, 0, 0.990303, 9.95062, 44.3743, -37.8213)
 script = ExtResource("5_ejdmq")
 
-[node name="RemoteTransform3D" type="RemoteTransform3D" parent="RescueBoatBody/RescueLadderArea3D/Seat15"]
+[node name="RemoteTransform3D" type="RemoteTransform3D" parent="RescueBoatBody/RescueArea3D/Seat15"]
 
-[node name="Seat16" type="Node3D" parent="RescueBoatBody/RescueLadderArea3D"]
-transform = Transform3D(0.990302, 0, -0.138931, 0, 1, 0, 0.138931, 0, 0.990302, 10.1862, 46.6465, 36.3032)
+[node name="Seat16" type="Node3D" parent="RescueBoatBody/RescueArea3D"]
+transform = Transform3D(0.990303, 0, -0.138931, 0, 1, 0, 0.138931, 0, 0.990303, 14.596, 47.9508, -46.1374)
 script = ExtResource("5_ejdmq")
 
-[node name="RemoteTransform3D" type="RemoteTransform3D" parent="RescueBoatBody/RescueLadderArea3D/Seat16"]
+[node name="RemoteTransform3D" type="RemoteTransform3D" parent="RescueBoatBody/RescueArea3D/Seat16"]
 
-[node name="Seat17" type="Node3D" parent="RescueBoatBody/RescueLadderArea3D"]
-transform = Transform3D(0.990302, 0, -0.138931, 0, 1, 0, 0.138931, 0, 0.990302, 9.1048, 46.6465, 44.0114)
+[node name="Seat17" type="Node3D" parent="RescueBoatBody/RescueArea3D"]
+transform = Transform3D(0.990303, 0, -0.138931, 0, 1, 0, 0.138931, 0, 0.990303, 3.38171, 46.7232, -48.9348)
 script = ExtResource("5_ejdmq")
 
-[node name="RemoteTransform3D" type="RemoteTransform3D" parent="RescueBoatBody/RescueLadderArea3D/Seat17"]
+[node name="RemoteTransform3D" type="RemoteTransform3D" parent="RescueBoatBody/RescueArea3D/Seat17"]
 
-[node name="Seat18" type="Node3D" parent="RescueBoatBody/RescueLadderArea3D"]
-transform = Transform3D(0.990302, 0, -0.138931, 0, 1, 0, 0.138931, 0, 0.990302, 2.73376, 46.6465, 48.1666)
+[node name="Seat18" type="Node3D" parent="RescueBoatBody/RescueArea3D"]
+transform = Transform3D(0.990303, 0, -0.138931, 0, 1, 0, 0.138931, 0, 0.990303, 6.78549, 44.1028, 21.8179)
 script = ExtResource("5_ejdmq")
 
-[node name="RemoteTransform3D" type="RemoteTransform3D" parent="RescueBoatBody/RescueLadderArea3D/Seat18"]
+[node name="RemoteTransform3D" type="RemoteTransform3D" parent="RescueBoatBody/RescueArea3D/Seat18"]
 
-[node name="Seat19" type="Node3D" parent="RescueBoatBody/RescueLadderArea3D"]
-transform = Transform3D(0.990302, 0, -0.138931, 0, 1, 0, 0.138931, 0, 0.990302, 1.76102, 46.6465, 55.1004)
+[node name="Seat19" type="Node3D" parent="RescueBoatBody/RescueArea3D"]
+transform = Transform3D(0.990303, 0, -0.138931, 0, 1, 0, 0.138931, 0, 0.990303, 6.59637, 42.9552, -59.5159)
 script = ExtResource("5_ejdmq")
 
-[node name="RemoteTransform3D" type="RemoteTransform3D" parent="RescueBoatBody/RescueLadderArea3D/Seat19"]
+[node name="RemoteTransform3D" type="RemoteTransform3D" parent="RescueBoatBody/RescueArea3D/Seat19"]
 
-[node name="Seat20" type="Node3D" parent="RescueBoatBody/RescueLadderArea3D"]
-transform = Transform3D(0.990302, 0, -0.138931, 0, 1, 0, 0.138931, 0, 0.990302, 14.7543, 46.6465, 56.9232)
+[node name="Seat20" type="Node3D" parent="RescueBoatBody/RescueArea3D"]
+transform = Transform3D(0.990304, 0, -0.138931, 0, 1, 0, 0.138931, 0, 0.990304, 1.66809, 44.3743, -59.4292)
 script = ExtResource("5_ejdmq")
 
-[node name="RemoteTransform3D" type="RemoteTransform3D" parent="RescueBoatBody/RescueLadderArea3D/Seat20"]
+[node name="RemoteTransform3D" type="RemoteTransform3D" parent="RescueBoatBody/RescueArea3D/Seat20"]
+
+[node name="Seat21" type="Node3D" parent="RescueBoatBody/RescueArea3D"]
+transform = Transform3D(0.990303, 0, -0.138931, 0, 1, 0, 0.138931, 0, 0.990303, 27.0778, 44.1028, 25.8715)
+script = ExtResource("5_ejdmq")
+
+[node name="RemoteTransform3D" type="RemoteTransform3D" parent="RescueBoatBody/RescueArea3D/Seat21"]
+
+[node name="Seat22" type="Node3D" parent="RescueBoatBody/RescueArea3D"]
+transform = Transform3D(0.990303, 0, -0.138931, 0, 1, 0, 0.138931, 0, 0.990303, 26.8885, 42.9552, -55.4623)
+script = ExtResource("5_ejdmq")
+
+[node name="RemoteTransform3D" type="RemoteTransform3D" parent="RescueBoatBody/RescueArea3D/Seat22"]
+
+[node name="Seat23" type="Node3D" parent="RescueBoatBody/RescueArea3D"]
+transform = Transform3D(0.990304, 0, -0.138931, 0, 1, 0, 0.138931, 0, 0.990304, 21.9603, 44.3743, -55.3756)
+script = ExtResource("5_ejdmq")
+
+[node name="RemoteTransform3D" type="RemoteTransform3D" parent="RescueBoatBody/RescueArea3D/Seat23"]
+
+[node name="Seat24" type="Node3D" parent="RescueBoatBody/RescueArea3D"]
+transform = Transform3D(0.990303, 0, -0.138931, 0, 1, 0, 0.138931, 0, 0.990303, 20.6431, 47.9508, -44.0823)
+script = ExtResource("5_ejdmq")
+
+[node name="RemoteTransform3D" type="RemoteTransform3D" parent="RescueBoatBody/RescueArea3D/Seat24"]
+
+[node name="Seat25" type="Node3D" parent="RescueBoatBody/RescueArea3D"]
+transform = Transform3D(0.990303, 0, -0.138931, 0, 1, 0, 0.138931, 0, 0.990303, 9.42877, 46.7232, -46.8796)
+script = ExtResource("5_ejdmq")
+
+[node name="RemoteTransform3D" type="RemoteTransform3D" parent="RescueBoatBody/RescueArea3D/Seat25"]
+
+[node name="Seat26" type="Node3D" parent="RescueBoatBody/RescueArea3D"]
+transform = Transform3D(0.990303, 0, -0.138931, 0, 1, 0, 0.138931, 0, 0.990303, 12.8326, 44.1028, 23.873)
+script = ExtResource("5_ejdmq")
+
+[node name="RemoteTransform3D" type="RemoteTransform3D" parent="RescueBoatBody/RescueArea3D/Seat26"]
+
+[node name="Seat27" type="Node3D" parent="RescueBoatBody/RescueArea3D"]
+transform = Transform3D(0.990303, 0, -0.138931, 0, 1, 0, 0.138931, 0, 0.990303, 12.6435, 42.9552, -57.4608)
+script = ExtResource("5_ejdmq")
+
+[node name="RemoteTransform3D" type="RemoteTransform3D" parent="RescueBoatBody/RescueArea3D/Seat27"]
+
+[node name="Seat28" type="Node3D" parent="RescueBoatBody/RescueArea3D"]
+transform = Transform3D(0.990304, 0, -0.138931, 0, 1, 0, 0.138931, 0, 0.990304, 7.71521, 44.3743, -57.3741)
+script = ExtResource("5_ejdmq")
+
+[node name="RemoteTransform3D" type="RemoteTransform3D" parent="RescueBoatBody/RescueArea3D/Seat28"]
+
+[node name="Seat29" type="Node3D" parent="RescueBoatBody/RescueArea3D"]
+transform = Transform3D(0.990303, 0, -0.138931, 0, 1, 0, 0.138931, 0, 0.990303, 12.3605, 47.9508, -65.6902)
+script = ExtResource("5_ejdmq")
+
+[node name="RemoteTransform3D" type="RemoteTransform3D" parent="RescueBoatBody/RescueArea3D/Seat29"]
+
+[node name="Seat30" type="Node3D" parent="RescueBoatBody/RescueArea3D"]
+transform = Transform3D(0.990303, 0, -0.138931, 0, 1, 0, 0.138931, 0, 0.990303, 1.14627, 46.7232, -68.4875)
+script = ExtResource("5_ejdmq")
+
+[node name="RemoteTransform3D" type="RemoteTransform3D" parent="RescueBoatBody/RescueArea3D/Seat30"]
+
+[node name="Seat31" type="Node3D" parent="RescueBoatBody/RescueArea3D"]
+transform = Transform3D(0.990303, 0, -0.138931, 0, 1, 0, 0.138931, 0, 0.990303, 4.55011, 44.1028, 2.26514)
+script = ExtResource("5_ejdmq")
+
+[node name="RemoteTransform3D" type="RemoteTransform3D" parent="RescueBoatBody/RescueArea3D/Seat31"]
+
+[node name="Seat32" type="Node3D" parent="RescueBoatBody/RescueArea3D"]
+transform = Transform3D(0.990304, 0, -0.138931, 0, 1, 0, 0.138931, 0, 0.990304, 4.3609, 42.9552, -79.0687)
+script = ExtResource("5_ejdmq")
+
+[node name="RemoteTransform3D" type="RemoteTransform3D" parent="RescueBoatBody/RescueArea3D/Seat32"]
+
+[node name="Seat33" type="Node3D" parent="RescueBoatBody/RescueArea3D"]
+transform = Transform3D(0.990304, 0, -0.138931, 0, 1, 0, 0.138931, 0, 0.990304, -0.567352, 44.3743, -78.982)
+script = ExtResource("5_ejdmq")
+
+[node name="RemoteTransform3D" type="RemoteTransform3D" parent="RescueBoatBody/RescueArea3D/Seat33"]
 
 [node name="SunkenShip" parent="." instance=ExtResource("3_oo71l")]
 transform = Transform3D(0.415212, -0.370166, 0.831009, -0.134358, 0.878503, 0.458454, -0.899748, -0.302008, 0.31503, -87.1453, 1.99334, 889.07)
@@ -288,6 +382,7 @@ text = "Save Passengers"
 
 [node name="Countdown" type="Node" parent="."]
 script = ExtResource("7_c5ja2")
+DurationSecs = 270.0
 
 [node name="Timer" type="Timer" parent="Countdown"]
 autostart = true
@@ -359,4 +454,5 @@ script = ExtResource("9_kd3l7")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="GameOverMenu/Control"]
 
+[connection signal="PassengerBoarded" from="RescueBoatBody/RescueArea3D" to="ScoreManager" method="IncrementSaved"]
 [connection signal="pressed" from="GameOverMenu/Control/MarginContainer/VBoxContainer/Panel/RestartButton" to="GameOverMenu/Control/MarginContainer/VBoxContainer/Panel/RestartButton" method="OnReloadButtonPressed"]

@@ -10,7 +10,7 @@ public partial class SeatedState : AnimatedState
 	{
 		base.Enter();
 		passenger.CollisionLayer = 2; // Collidable with rescue zone
-		passenger.CollisionMask = 2;
+		passenger.CollisionMask = 2; // consider setting to 0
 		if(lifeRing != null)
 			lifeRing.Visible = false;
 	}

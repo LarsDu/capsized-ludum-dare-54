@@ -10,11 +10,43 @@ radius = 5.798
 [node name="Passenger" node_paths=PackedStringArray("mesh") instance=ExtResource("1_x7a6w")]
 mesh = NodePath("humanoid_armature/Skeleton3D/MeshInstance3D")
 
+[node name="Skeleton3D" parent="humanoid_armature" index="0"]
+bones/0/position = Vector3(0, 1.83738, 0)
+bones/0/rotation = Quaternion(-9.68587e-09, 0.986708, 2.86057e-08, -0.162502)
+bones/1/rotation = Quaternion(3.95663e-16, -0.0118697, -8.06819e-17, 0.99993)
+bones/2/rotation = Quaternion(6.81597e-22, -1.19209e-07, -4.23516e-22, 1)
+bones/3/rotation = Quaternion(0.237749, 0.0470635, 0.103818, 0.964615)
+bones/4/position = Vector3(0.699667, 1.1856, -0.0360644)
+bones/4/rotation = Quaternion(-1.12216e-07, 3.56396e-08, -0.818311, 0.574776)
+bones/5/rotation = Quaternion(0.189338, -0.151337, -0.79514, 0.555878)
+bones/6/rotation = Quaternion(0.630315, -0.0469689, -0.3719, 0.679843)
+bones/7/rotation = Quaternion(-2.53488e-08, 6.5916e-08, -0.160926, 0.986966)
+bones/8/position = Vector3(-0.699667, 1.1856, -0.0360642)
+bones/8/rotation = Quaternion(1.1826e-08, 5.1833e-08, 0.818311, 0.574776)
+bones/9/rotation = Quaternion(0.332958, 0.0842344, 0.590222, 0.730535)
+bones/10/rotation = Quaternion(0.697791, 0.122411, 0.251096, 0.659587)
+bones/11/rotation = Quaternion(0.0125179, 0.0450427, 0.174983, 0.983461)
+bones/12/rotation = Quaternion(-0.119736, 0.687715, 0.710567, 0.0883609)
+bones/12/scale = Vector3(1, 1, 1)
+bones/13/rotation = Quaternion(-0.581913, 1.71163e-05, 0.00257704, 0.813247)
+bones/14/rotation = Quaternion(0.531075, 0.0640265, 0.0787114, 0.841228)
+bones/15/rotation = Quaternion(-0.137293, 0.710227, 0.677632, 0.132447)
+bones/15/scale = Vector3(1, 0.999997, 1.00002)
+bones/16/rotation = Quaternion(-0.722041, -1.4554e-05, -0.00319762, 0.691844)
+bones/17/rotation = Quaternion(0.562753, 0.0597602, 0.219014, 0.79484)
+bones/19/position = Vector3(-0.981051, 0.478734, -1.08423)
+bones/19/rotation = Quaternion(0.118977, 0.684295, 0.718282, 0.0406934)
+bones/21/position = Vector3(0.935141, 0.514277, -1.34628)
+bones/21/rotation = Quaternion(0.213799, 0.728094, 0.647979, 0.0655212)
+
 [node name="humanoid_template" parent="humanoid_armature/Skeleton3D" index="0"]
 visible = false
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="humanoid_armature/Skeleton3D" index="1"]
 mesh = ExtResource("2_41g2p")
+
+[node name="SeatedState" parent="StateMachine" index="0"]
+animationName = "clap"
 
 [node name="CollisionShape3D" parent="." index="4"]
 shape = SubResource("SphereShape3D_cqchu")

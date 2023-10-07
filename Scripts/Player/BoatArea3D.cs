@@ -6,6 +6,8 @@ using Godot.Collections;
 public partial class BoatArea3D : Area3D
 {
 	[Export] Array<Seat> seats;
+	[Export] PassengerState passengerStateOnBoard = PassengerState.Cheering;
+	[Signal] public delegate void PassengerBoardedEventHandler();
 
     public override void _Ready()
     {
@@ -54,7 +56,8 @@ public partial class BoatArea3D : Area3D
 			if(!seat.isOccupied){
 				//newPassenger.GetNode<CollisionShape3D>("CollisionShape3D").Disabled = true;
 				seat.Passenger = newPassenger;
-				seat.Passenger.PassengerState = PassengerState.Sitting;
+				seat.Passenger.PassengerState = passengerStateOnBoard;
+				EmitSignal(SignalName.PassengerBoarded);
 				isBoatFull = false;
 				break;
 			}
@@ -65,7 +68,7 @@ public partial class BoatArea3D : Area3D
 			Seat nearestSeat = nearest as Seat;
 			nearestSeat.Passenger.PassengerState = PassengerState.Ejecting;
 			nearestSeat.Passenger = newPassenger;
-			nearestSeat.Passenger.PassengerState = PassengerState.Sitting;
+			nearestSeat.Passenger.PassengerState = passengerStateOnBoard;
 		}
 		// Note: may add a false condition
 		//return true;
