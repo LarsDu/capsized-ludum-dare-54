@@ -21,9 +21,11 @@ public enum PassengerState{
 public partial class Passenger : CharacterBody3D
 {
 	[Export] bool setRandomPassengerType = false;
+	[Export] bool randomizeColor = true;
+	[Export] float hueRange = 0.4f;
 	[Export] StateMachine stateMachine;
 	[Export] AnimationPlayer animationPlayer;
-
+	[Export] MeshInstance3D mesh;
 
 	[ExportCategory("States")]
 	[Export] private PassengerState _passengerState = PassengerState.Flailing;
@@ -64,6 +66,21 @@ public partial class Passenger : CharacterBody3D
 		PopulatePassengerStateMap();
 		if(animationPlayer == null){
 			animationPlayer = GetNode<AnimationPlayer>("AnimationPlayer");
+		}
+	
+		if(mesh != null && randomizeColor){
+			// https://www.reddit.com/r/godot/comments/15qvust/albedo_color_isnt_a_property_of_material_godot_41/
+			// Override material with a random albedo color
+			//var overrideMaterial = new StandardMaterial3D();
+			var activeMaterial = mesh.GetActiveMaterial(0);
+			var overrideMaterial = activeMaterial.Duplicate() as StandardMaterial3D;
+			overrideMaterial.AlbedoColor = new Color(
+				(float) Mathf.Clamp( overrideMaterial.AlbedoColor.R +  GD.RandRange(-hueRange, hueRange), 0.0, 1.0f),
+				(float) Mathf.Clamp( overrideMaterial.AlbedoColor.G +  GD.RandRange(-hueRange, hueRange), 0.0, 1.0f),
+				(float) Mathf.Clamp( overrideMaterial.AlbedoColor.B +  GD.RandRange(-hueRange, hueRange), 0.0, 1.0f),
+				1.0f
+			);
+			mesh.SetSurfaceOverrideMaterial(0, overrideMaterial);
 		}
 		PassengerState = _passengerState;
 	}

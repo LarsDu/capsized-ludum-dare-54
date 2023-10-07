@@ -1,8 +1,7 @@
-[gd_scene load_steps=27 format=3 uid="uid://bqsoajho14s0w"]
+[gd_scene load_steps=26 format=3 uid="uid://bqsoajho14s0w"]
 
 [ext_resource type="Script" path="res://Scripts/Passenger.cs" id="1_iyx0b"]
 [ext_resource type="ArrayMesh" uid="uid://cetw1cx3qnbx8" path="res://Meshes/characters/sailor.res" id="2_24us4"]
-[ext_resource type="Material" uid="uid://dx4abhptbjgts" path="res://Materials/gamejam.tres" id="2_v2bem"]
 [ext_resource type="ArrayMesh" uid="uid://byi7th70q620y" path="res://Meshes/lifering.res" id="3_3flyx"]
 [ext_resource type="Animation" uid="uid://bf854hfyid7l8" path="res://Animations/clap.res" id="4_kohxb"]
 [ext_resource type="Script" path="res://Scripts/StateMachine/StateMachine.cs" id="4_m3k7x"]
@@ -1005,13 +1004,14 @@ _data = {
 resource_local_to_scene = true
 radius = 5.798
 
-[node name="Passenger" type="CharacterBody3D" node_paths=PackedStringArray("stateMachine", "animationPlayer", "flailingState", "sittingState", "ejectingState", "leavingState", "seekingState", "cheeringState", "climbingState", "lifeRingMesh") groups=["Passenger"]]
+[node name="Passenger" type="CharacterBody3D" node_paths=PackedStringArray("stateMachine", "animationPlayer", "mesh", "flailingState", "sittingState", "ejectingState", "leavingState", "seekingState", "cheeringState", "climbingState", "lifeRingMesh") groups=["Passenger"]]
 transform = Transform3D(1, 0, 0, 0, 0.999936, -0.0112746, 0, 0.0112746, 0.999936, 0, 0, 0)
 platform_floor_layers = 0
 script = ExtResource("1_iyx0b")
 setRandomPassengerType = true
 stateMachine = NodePath("StateMachine")
 animationPlayer = NodePath("AnimationPlayer")
+mesh = NodePath("humanoid_armature/Skeleton3D/humanoid_template")
 flailingState = NodePath("StateMachine/FlailingState")
 sittingState = NodePath("StateMachine/SeatedState")
 ejectingState = NodePath("StateMachine/KickedOffBoatState")
@@ -1182,7 +1182,6 @@ bones/21/scale = Vector3(1, 1, 1)
 [node name="humanoid_template" type="MeshInstance3D" parent="humanoid_armature/Skeleton3D"]
 mesh = ExtResource("2_24us4")
 skin = SubResource("Skin_5makw")
-surface_material_override/0 = ExtResource("2_v2bem")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 autoplay = "help"
@@ -1247,8 +1246,10 @@ script = ExtResource("14_j6swk")
 animationPlayer = NodePath("../../AnimationPlayer")
 animationName = "cheer"
 
-[node name="ClimbState" type="Node3D" parent="StateMachine"]
+[node name="ClimbState" type="Node3D" parent="StateMachine" node_paths=PackedStringArray("animationPlayer")]
 script = ExtResource("18_bquit")
+animationPlayer = NodePath("../../AnimationPlayer")
+animationName = "climb"
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4.36, 0)

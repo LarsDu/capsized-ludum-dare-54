@@ -1,4 +1,4 @@
-[gd_scene load_steps=26 format=3 uid="uid://ksyeh4c4ja6d"]
+[gd_scene load_steps=29 format=3 uid="uid://ksyeh4c4ja6d"]
 
 [ext_resource type="Material" uid="uid://co481815cj85w" path="res://Materials/water_shaded.tres" id="1_30glw"]
 [ext_resource type="PackedScene" uid="uid://dkrjsaoks54vx" path="res://Scenes/player_lifeboat.tscn" id="2_14251"]
@@ -6,9 +6,12 @@
 [ext_resource type="PackedScene" uid="uid://rv04kq3xadjx" path="res://Scenes/ship_rescue.tscn" id="3_oo71l"]
 [ext_resource type="PackedScene" uid="uid://bqsoajho14s0w" path="res://Scenes/Characters/sailor_passenger.tscn" id="3_t7uka"]
 [ext_resource type="ArrayMesh" uid="uid://4uh52n1xrt3b" path="res://Meshes/rescue_boat.res" id="3_xd0oe"]
+[ext_resource type="PackedScene" uid="uid://clluoxufwyedc" path="res://Scenes/Characters/businessman_passenger.tscn" id="4_4s8ax"]
 [ext_resource type="Script" path="res://Scripts/Player/BoatArea3D.cs" id="4_7347x"]
 [ext_resource type="Script" path="res://Scripts/RandomSpawner.cs" id="4_ffa1u"]
 [ext_resource type="Script" path="res://Scripts/Player/Seat.cs" id="5_ejdmq"]
+[ext_resource type="PackedScene" uid="uid://bfecwfbote4pu" path="res://Scenes/Characters/moneybags_passenger.tscn" id="5_qknx4"]
+[ext_resource type="PackedScene" uid="uid://b40s04tyr48s2" path="res://Scenes/Characters/lady_passenger.tscn" id="6_twyj0"]
 [ext_resource type="Script" path="res://Scripts/Countdown.cs" id="7_c5ja2"]
 [ext_resource type="ArrayMesh" uid="uid://cyx53lvu0xjw1" path="res://Meshes/iceberg.res" id="7_t1x2n"]
 [ext_resource type="Script" path="res://Scripts/GameOver.cs" id="8_27vvt"]
@@ -67,7 +70,7 @@ shape = SubResource("ConcavePolygonShape3D_jnlv6")
 
 [node name="LifeRingsRandomSpawner" type="Node3D" parent="."]
 script = ExtResource("4_ffa1u")
-packedScenes = Array[PackedScene]([ExtResource("3_t7uka")])
+packedScenes = Array[PackedScene]([ExtResource("3_t7uka"), ExtResource("4_4s8ax"), ExtResource("5_qknx4"), ExtResource("6_twyj0")])
 maxSpawn = 60
 radius = 200.0
 
