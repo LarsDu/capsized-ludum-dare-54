@@ -26,12 +26,11 @@ public partial class RandomSpawner : Node3D
 				continue;
 			}
 
-			Vector3 spawnRange = new Vector3((float)GD.RandRange(-radius, radius), 0.0f, (float)GD.RandRange(-radius, radius));
-			Vector3 globalSpawnPosition = GlobalTransform.Origin + spawnRange;
+			Vector3 globalSpawnPosition = GlobalTransform.Origin + RandomSpawnRange();
 			if(_playerNode != null){
 				// Do not spawn too close to the player
 				while(globalSpawnPosition.DistanceTo(_playerNode.GlobalPosition) < 20.0f){
-					globalSpawnPosition = GlobalTransform.Origin + new Vector3((float)GD.RandRange(-radius, radius), 0.0f, (float)GD.RandRange(-radius, radius));
+					globalSpawnPosition = GlobalTransform.Origin + RandomSpawnRange();
 				}
 			}
 			instance.GlobalPosition = globalSpawnPosition;
@@ -39,5 +38,9 @@ public partial class RandomSpawner : Node3D
 			AddChild(instance);
 
 		}
+	}
+
+	protected Vector3 RandomSpawnRange(){
+		return new Vector3((float)GD.RandRange(-radius, radius), 0.0f, (float)GD.RandRange(-radius, radius));
 	}
 }
