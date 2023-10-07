@@ -1,4 +1,4 @@
-[gd_scene load_steps=32 format=3 uid="uid://ksyeh4c4ja6d"]
+[gd_scene load_steps=33 format=3 uid="uid://ksyeh4c4ja6d"]
 
 [ext_resource type="Material" uid="uid://co481815cj85w" path="res://Materials/water_shaded.tres" id="1_30glw"]
 [ext_resource type="PackedScene" uid="uid://dkrjsaoks54vx" path="res://Scenes/player_lifeboat.tscn" id="2_14251"]
@@ -19,6 +19,7 @@
 [ext_resource type="Script" path="res://Scripts/UI/SceneReloadButton.cs" id="9_kd3l7"]
 [ext_resource type="Script" path="res://Scripts/LadderArea3D.cs" id="10_tfu4a"]
 [ext_resource type="Script" path="res://Scripts/Scoring/ScoreManager.cs" id="11_w3wq3"]
+[ext_resource type="Script" path="res://Scripts/FinalReadout.cs" id="19_xqmfj"]
 
 [sub_resource type="PhysicalSkyMaterial" id="PhysicalSkyMaterial_5tdke"]
 turbidity = 27.9
@@ -340,6 +341,7 @@ mesh = ExtResource("7_t1x2n")
 skeleton = NodePath("../..")
 
 [node name="ScoreManager" type="Node" parent="." node_paths=PackedStringArray("profitLabel", "savedLabel", "deathsLabel") groups=["ScoreManager"]]
+unique_name_in_owner = true
 script = ExtResource("11_w3wq3")
 profitLabel = NodePath("PROFIT")
 savedLabel = NodePath("SAVED")
@@ -382,7 +384,7 @@ text = "Save Passengers"
 
 [node name="Countdown" type="Node" parent="."]
 script = ExtResource("7_c5ja2")
-DurationSecs = 270.0
+DurationSecs = 180.0
 
 [node name="Timer" type="Timer" parent="Countdown"]
 autostart = true
@@ -439,27 +441,29 @@ text = "GAME OVER"
 fit_content = true
 autowrap_mode = 0
 
-[node name="FinalReadout" type="RichTextLabel" parent="GameOverMenu/Control/MarginContainer/VBoxContainer/Panel"]
+[node name="FinalReadout" type="RichTextLabel" parent="GameOverMenu/Control/MarginContainer/VBoxContainer/Panel" node_paths=PackedStringArray("_scoreManager")]
 modulate = Color(0.556863, 1, 1, 1)
 custom_minimum_size = Vector2(80, 0)
 layout_mode = 0
-offset_left = 314.0
-offset_top = 100.0
-offset_right = 492.0
-offset_bottom = 147.0
+offset_left = 259.0
+offset_top = 86.0
+offset_right = 541.0
+offset_bottom = 250.0
 theme = SubResource("Theme_s0xf7")
 theme_override_font_sizes/normal_font_size = 31
 fit_content = true
 autowrap_mode = 0
+script = ExtResource("19_xqmfj")
+_scoreManager = NodePath("../../../../../../ScoreManager")
 
 [node name="RestartButton" type="Button" parent="GameOverMenu/Control/MarginContainer/VBoxContainer/Panel"]
 process_mode = 2
 self_modulate = Color(0.792157, 1, 1, 1)
 layout_mode = 0
-offset_left = 312.0
-offset_top = 278.0
-offset_right = 488.0
-offset_bottom = 341.0
+offset_left = 319.0
+offset_top = 309.0
+offset_right = 495.0
+offset_bottom = 372.0
 theme = SubResource("Theme_f1kbk")
 theme_override_font_sizes/font_size = 40
 text = "RESTART"
@@ -471,4 +475,6 @@ script = ExtResource("9_kd3l7")
 [connection signal="PassengerEjected" from="RescueBoatBody/RescueArea3D" to="ScoreManager" method="DecrementSaved"]
 [connection signal="PassengerWealthIn" from="RescueBoatBody/RescueArea3D" to="ScoreManager" method="IncrementProfit"]
 [connection signal="PassengerWealthOut" from="RescueBoatBody/RescueArea3D" to="ScoreManager" method="DecrementProfit"]
+[connection signal="TimeUp" from="Countdown" to="ScoreManager" method="HideLabels"]
+[connection signal="TimeUp" from="Countdown" to="GameOverMenu/Control/MarginContainer/VBoxContainer/Panel/FinalReadout" method="UpdateReadout"]
 [connection signal="pressed" from="GameOverMenu/Control/MarginContainer/VBoxContainer/Panel/RestartButton" to="GameOverMenu/Control/MarginContainer/VBoxContainer/Panel/RestartButton" method="OnReloadButtonPressed"]

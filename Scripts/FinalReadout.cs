@@ -3,10 +3,9 @@ using System;
 
 public partial class FinalReadout : RichTextLabel
 {
-	private ScoreManager _scoreManager;
-	// Called when the node enters the scene tree for the first time.
-	public override void _Ready()
-	{
+	[Export] private ScoreManager _scoreManager;
+
+	public void UpdateReadout(){
 		_scoreManager = GetNode<ScoreManager>("%ScoreManager");
 		// Show saved, profit and deaths
 		this.Text = "SAVED:\t" + _scoreManager.Saved.ToString() + "\n" + 
@@ -15,10 +14,20 @@ public partial class FinalReadout : RichTextLabel
 					"RATING:\t" + GetRating(_scoreManager);
 	}
 
+
 	public string GetRating(ScoreManager scoreManager){
 		// Give sily names based on how many people died and how much money you made
 		// Nested ifs are yuck
-		if (scoreManager.Deaths > 40){
+		if (scoreManager.Deaths > 50){
+			if (scoreManager.Profit > 1000){
+				return "CAPTAIN AHAB";
+			}
+			if(scoreManager.Saved > 50){
+				return "CAPTAIN KIRK";
+			}
+			return "CAPTAIN HOOK";
+		}
+		else if (scoreManager.Deaths > 40){
 			if (scoreManager.Profit > 1000){
 				return "JAMES CAMERON";
 			}
@@ -43,8 +52,10 @@ public partial class FinalReadout : RichTextLabel
 			}
 		} else if (scoreManager.Deaths > 0 ){
 			if (scoreManager.Profit > 500){
-				return "NAVIGATOR";
-			} 
+				return "NAVIGANTE";
+			} else if (scoreManager.Saved < 10){
+				return "INCOMPETENT";
+			}
 			return "LIFESAVER";
 		} else if (scoreManager.Deaths == 0){
 			if (scoreManager.Saved > 0 && scoreManager.Profit > 500){
