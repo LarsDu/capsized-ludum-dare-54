@@ -15,6 +15,7 @@ public enum PassengerState{
 	Leaving,
 	Seeking,
 	Cheering,
+	Climbing
 }
 
 public partial class Passenger : CharacterBody3D
@@ -48,6 +49,7 @@ public partial class Passenger : CharacterBody3D
 	[Export] protected BaseState leavingState;
 	[Export] protected BaseState seekingState;
 	[Export] protected BaseState cheeringState;
+	[Export] protected BaseState climbingState;
 
 	protected Dictionary<PassengerState, BaseState> passengerStateMap = new Dictionary<PassengerState, BaseState>();
 	
@@ -73,6 +75,8 @@ public partial class Passenger : CharacterBody3D
 			{PassengerState.Leaving, leavingState},
 			{PassengerState.Seeking, seekingState},
 			{PassengerState.Cheering, cheeringState},
+			{PassengerState.Climbing, climbingState},
+
 		};
 	}
 

@@ -4,7 +4,7 @@
 [ext_resource type="PackedScene" uid="uid://dkrjsaoks54vx" path="res://Scenes/player_lifeboat.tscn" id="2_14251"]
 [ext_resource type="Material" uid="uid://dx4abhptbjgts" path="res://Materials/gamejam.tres" id="3_dhs85"]
 [ext_resource type="PackedScene" uid="uid://rv04kq3xadjx" path="res://Scenes/ship_rescue.tscn" id="3_oo71l"]
-[ext_resource type="PackedScene" uid="uid://bqsoajho14s0w" path="res://Scenes/Characters/passenger.tscn" id="3_t7uka"]
+[ext_resource type="PackedScene" uid="uid://bqsoajho14s0w" path="res://Scenes/Characters/sailor_passenger.tscn" id="3_t7uka"]
 [ext_resource type="ArrayMesh" uid="uid://4uh52n1xrt3b" path="res://Meshes/rescue_boat.res" id="3_xd0oe"]
 [ext_resource type="Script" path="res://Scripts/Player/BoatArea3D.cs" id="4_7347x"]
 [ext_resource type="Script" path="res://Scripts/RandomSpawner.cs" id="4_ffa1u"]
