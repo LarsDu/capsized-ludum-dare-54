@@ -14470,6 +14470,16 @@ _subresources={
 "save_to_file/make_streamable": "",
 "save_to_file/path": "res://Meshes/characters/businessman.res"
 },
+"humanoid_models-a58e23b4826d733dfb02dcf283623b99_Cube_005": {
+"generate/lightmap_uv": 0,
+"generate/lods": 0,
+"generate/shadow_meshes": 0,
+"lods/normal_merge_angle": 60.0,
+"lods/normal_split_angle": 25.0,
+"save_to_file/enabled": true,
+"save_to_file/make_streamable": "",
+"save_to_file/path": "res://Meshes/characters/moneylady.res"
+},
 "humanoid_models-a58e23b4826d733dfb02dcf283623b99_Cube_006": {
 "generate/lightmap_uv": 0,
 "generate/lods": 0,

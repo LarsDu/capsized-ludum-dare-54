@@ -1,4 +1,4 @@
-[gd_scene load_steps=33 format=3 uid="uid://ksyeh4c4ja6d"]
+[gd_scene load_steps=34 format=3 uid="uid://ksyeh4c4ja6d"]
 
 [ext_resource type="Material" uid="uid://co481815cj85w" path="res://Materials/water_shaded.tres" id="1_30glw"]
 [ext_resource type="PackedScene" uid="uid://dkrjsaoks54vx" path="res://Scenes/player_lifeboat.tscn" id="2_14251"]
@@ -16,6 +16,7 @@
 [ext_resource type="Script" path="res://Scripts/Countdown.cs" id="7_c5ja2"]
 [ext_resource type="ArrayMesh" uid="uid://cyx53lvu0xjw1" path="res://Meshes/iceberg.res" id="7_t1x2n"]
 [ext_resource type="Script" path="res://Scripts/GameOver.cs" id="8_27vvt"]
+[ext_resource type="PackedScene" uid="uid://buc3dwbk4gqql" path="res://Scenes/Characters/moneylady_passenger.tscn" id="8_r26en"]
 [ext_resource type="Script" path="res://Scripts/UI/SceneReloadButton.cs" id="9_kd3l7"]
 [ext_resource type="Script" path="res://Scripts/LadderArea3D.cs" id="10_tfu4a"]
 [ext_resource type="Script" path="res://Scripts/Scoring/ScoreManager.cs" id="11_w3wq3"]
@@ -75,7 +76,7 @@ shape = SubResource("ConcavePolygonShape3D_jnlv6")
 
 [node name="LifeRingsRandomSpawner" type="Node3D" parent="."]
 script = ExtResource("4_ffa1u")
-packedScenes = Array[PackedScene]([ExtResource("3_t7uka"), ExtResource("4_4s8ax"), ExtResource("5_qknx4"), ExtResource("6_twyj0"), ExtResource("7_a4e3i")])
+packedScenes = Array[PackedScene]([ExtResource("3_t7uka"), ExtResource("4_4s8ax"), ExtResource("5_qknx4"), ExtResource("6_twyj0"), ExtResource("7_a4e3i"), ExtResource("8_r26en")])
 maxSpawn = 115
 radius = 190.0
 
