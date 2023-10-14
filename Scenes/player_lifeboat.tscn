@@ -16,7 +16,7 @@ height = 39.1037
 
 [node name="PlayerLifeboat" type="CharacterBody3D" groups=["Player"]]
 script = ExtResource("1_ek621")
-RowSpeed = 600.0
+RowSpeed = 850.0
 
 [node name="Rower" parent="." instance=ExtResource("2_mbovw")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 5.5353, 15.882)

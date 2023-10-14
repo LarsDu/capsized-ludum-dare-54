@@ -13,11 +13,42 @@ maxWealth = 500
 mesh = NodePath("humanoid_armature/Skeleton3D/MeshInstance3D")
 randomizeColor = false
 
+[node name="Skeleton3D" parent="humanoid_armature" index="0"]
+bones/0/position = Vector3(0, 2.80901, 0)
+bones/0/rotation = Quaternion(0, 1, -1.5259e-05, 2.39174e-05)
+bones/1/rotation = Quaternion(0, 0, 0, 1)
+bones/3/rotation = Quaternion(0, 0, 0, 1)
+bones/4/position = Vector3(0.699666, 1.0151, -0.0360644)
+bones/4/rotation = Quaternion(-2.49736e-05, 0, -0.81831, 0.574777)
+bones/5/rotation = Quaternion(0.759277, 0.200814, 0.114135, 0.608395)
+bones/6/rotation = Quaternion(-0.0728137, 0.13761, 0.652322, 0.74178)
+bones/7/rotation = Quaternion(-4.91029e-06, 0, -0.160895, 0.986971)
+bones/8/position = Vector3(-0.699666, 1.0151, -0.0360642)
+bones/8/rotation = Quaternion(-1.24868e-05, -1.24868e-05, 0.81831, 0.574777)
+bones/9/rotation = Quaternion(0.364391, -0.601811, 0.451115, 0.549124)
+bones/10/rotation = Quaternion(-0.00345854, 0.00197941, -0.707307, 0.706895)
+bones/11/rotation = Quaternion(-2.45514e-06, -2.45514e-06, 0.160895, 0.986971)
+bones/12/rotation = Quaternion(-0.000396474, 0.0397273, 0.999209, 0.00150998)
+bones/12/scale = Vector3(1, 1, 1)
+bones/13/rotation = Quaternion(-0.321002, 1.47601e-05, 0.00142191, 0.947077)
+bones/14/rotation = Quaternion(0.824516, -0.00071811, 0.000415748, 0.565838)
+bones/15/rotation = Quaternion(-0.00246174, -0.674138, -0.738598, 0.0021332)
+bones/15/scale = Vector3(1, 0.999997, 1.00001)
+bones/16/rotation = Quaternion(-0.621675, 0, -0.00277278, 0.78327)
+bones/17/rotation = Quaternion(0.575615, 0.00228657, 0.000662114, 0.817717)
+bones/19/position = Vector3(-0.935141, 0.588307, 0.565803)
+bones/19/rotation = Quaternion(-2.15795e-05, 0.707107, 0.707107, 2.39174e-05)
+bones/21/position = Vector3(0.935141, 1.35561, -1.20589)
+bones/21/rotation = Quaternion(-2.15795e-05, 0.707107, 0.707107, 2.39174e-05)
+
 [node name="humanoid_template" parent="humanoid_armature/Skeleton3D" index="0"]
 visible = false
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="humanoid_armature/Skeleton3D" index="1"]
 mesh = ExtResource("2_41g2p")
+
+[node name="AnimationPlayer" parent="humanoid_armature" index="1"]
+autoplay = "humanoid/clap"
 
 [node name="SeatedState" parent="StateMachine" index="0"]
 animationName = "humanoid/clap"

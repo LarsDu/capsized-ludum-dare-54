@@ -8,7 +8,7 @@ resource_local_to_scene = true
 radius = 5.798
 
 [node name="Passenger" node_paths=PackedStringArray("mesh") instance=ExtResource("1_cnaa7")]
-minWealth = -310
+minWealth = 100
 maxWealth = 400
 mesh = NodePath("humanoid_armature/Skeleton3D/MeshInstance3D")
 randomizeColor = false

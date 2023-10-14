@@ -96,6 +96,7 @@ public partial class Passenger : CharacterBody3D
 
 	protected void DetermineWealth(){
 		wealth = GD.RandRange(minWealth, maxWealth);
+		wealth = 5 * Mathf.Max(1, (wealth/5));
 		if(moneyLabel == null){
 			moneyLabel = GetNode<Label3D>("%MoneyLabel");
 			GD.Print("MoneyLabel: " + moneyLabel);
